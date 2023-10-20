@@ -32,6 +32,7 @@ export interface SocialItem {
   | "Tiktok"
   | "Spotify"
   | "Youtube"
+  | "Pinterest"
   | "Twitter";
   link: string;
 }
