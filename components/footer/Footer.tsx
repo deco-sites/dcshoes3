@@ -11,6 +11,7 @@ import Social from "$store/components/footer/Social.tsx";
 import Newsletter from "$store/islands/Newsletter.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+import LocateMe from "$store/islands/LocateMe.tsx";
 
 export type Item = {
   label: string;
@@ -24,12 +25,14 @@ export type Section = {
 
 export interface SocialItem {
   label:
-    | "Discord"
-    | "Facebook"
-    | "Instagram"
-    | "Linkedin"
-    | "Tiktok"
-    | "Twitter";
+  | "Discord"
+  | "Facebook"
+  | "Instagram"
+  | "Linkedin"
+  | "Tiktok"
+  | "Spotify"
+  | "Youtube"
+  | "Twitter";
   link: string;
 }
 
@@ -45,8 +48,10 @@ export interface MobileApps {
 }
 
 export interface RegionOptions {
-  currency?: Item[];
-  language?: Item[];
+  label?: "Global"
+    | "Global2";
+  href?: string;
+  text?: string;
 }
 
 export interface NewsletterForm {
@@ -68,7 +73,8 @@ export interface Layout {
     | "Variation 2"
     | "Variation 3"
     | "Variation 4"
-    | "Variation 5";
+    | "Variation 5"
+    | "Variation 6";
   hide?: {
     logo?: boolean;
     newsletter?: boolean;
@@ -79,7 +85,21 @@ export interface Layout {
     regionOptions?: boolean;
     extraLinks?: boolean;
     backToTheTop?: boolean;
+    locateMe?: boolean
   };
+}
+
+export interface LocateMeProps {
+  title?: string;
+  input?: {
+    placeholder?: string;
+  }
+  cta?: {
+    label: "Locate"
+    | "Locate2";
+    /** @description Remember that the href is the compose href + the query string 'locality' with cep */
+    href: string;
+  }
 }
 
 export interface Props {
@@ -93,6 +113,7 @@ export interface Props {
     description?: string;
     form?: NewsletterForm;
   };
+  locateMe?: LocateMeProps;
   sections?: Section[];
   social?: {
     title?: string;
@@ -155,12 +176,26 @@ function Footer({
     title: "Redes sociais",
     items: [{ label: "Instagram", link: "/" }, { label: "Tiktok", link: "/" }],
   },
+  locateMe = {
+    title: "ENCONTRE A LOJA MAIS PRÓXIMA",
+    input: {
+      placeholder: "Cidade ou Cep",
+    },
+    cta: {
+      label: "Locate",
+      href: "nossas-lojas",
+    }
+  },
   payments = {
     title: "Formas de pagamento",
     items: [{ label: "Mastercard" }, { label: "Visa" }, { label: "Pix" }],
   },
   mobileApps = { apple: "/", android: "/" },
-  regionOptions = { currency: [], language: [] },
+  regionOptions = {
+    label: "Global",
+    href: "#",
+    text: "Escolha a sua região",
+  },
   extraLinks = [],
   backToTheTop,
   layout = {
@@ -176,6 +211,7 @@ function Footer({
       regionOptions: false,
       extraLinks: false,
       backToTheTop: false,
+      locateMe: false
     },
   },
 }: Props) {
@@ -196,6 +232,9 @@ function Footer({
         layout?.variation == "Variation 3"}
     />
   );
+  const _locateMe = layout?.hide?.locateMe
+    ? <></>
+    : <LocateMe {...locateMe} />
   const _social = layout?.hide?.socialLinks
     ? <></>
     : <Social content={social} vertical={layout?.variation == "Variation 3"} />;
@@ -338,6 +377,30 @@ function Footer({
                 {_links}
                 {_region}
               </div>
+            </div>
+          </div>
+        )}
+        {layout?.variation == "Variation 6" && (
+          <div class="flex flex-col gap-10">
+            {_newsletter}
+            {layout?.hide?.newsletter ? <></> : <Divider />}
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20 md:justify-between">
+              <div class="flex flex-col gap-10 md:w-2/5 lg:pl-10">
+                {_locateMe}
+                {_payments}
+                {_social}
+                {_apps}
+              </div>
+              {_sectionLinks}
+            </div>
+            <Divider />
+            <div class="flex flex-col md:flex-row md:justify-between gap-10 items-center">
+              <div class="flex flex-col md:flex-row gap-10 md:items-center">
+                {_links}
+                {_region}
+              </div>
+              {_logo}
+              <PoweredByDeco />
             </div>
           </div>
         )}

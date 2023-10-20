@@ -1,15 +1,5 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-
-export interface SocialItem {
-  label:
-    | "Discord"
-    | "Facebook"
-    | "Instagram"
-    | "Linkedin"
-    | "Tiktok"
-    | "Twitter";
-  link: string;
-}
+import type { SocialItem } from "./Footer.tsx"
 
 export default function Social(
   { content, vertical = false }: {

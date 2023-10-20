@@ -1,4 +1,7 @@
 import Header from "$store/components/ui/SectionHeader.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import TextAboutUs from "$store/islands/AboutUsNewsletter.tsx";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 export interface Form {
   placeholder?: string;
@@ -7,17 +10,25 @@ export interface Form {
   helpText?: string;
 }
 
+export interface TextAboutUsProps {
+  /** @format html */
+  text: string;
+}
+
 export interface Props {
+  srcMobile?: ImageWidget,
+  srcDesktop?: ImageWidget
   title?: string;
   /** @format textarea */
   description?: string;
   form?: Form;
+  textAboutUs?: TextAboutUsProps;
   layout?: {
     headerFontSize?: "Large" | "Normal";
     content?: {
       border?: boolean;
       alignment?: "Center" | "Left" | "Side to side";
-      bgColor?: "Normal" | "Reverse";
+      bg?: "Normal" | "Reverse" | "Image";
     };
   };
 }
@@ -31,6 +42,9 @@ const DEFAULT_PROPS: Props = {
     helpText:
       'Ao se inscrever, você concorda com nossa <a class="link" href="/politica-de-privacidade">Política de privacidade</a>.',
   },
+  textAboutUs: {
+    text: "",
+  },
   layout: {
     headerFontSize: "Large",
     content: {
@@ -38,11 +52,14 @@ const DEFAULT_PROPS: Props = {
       alignment: "Center",
     },
   },
+  srcMobile: "",
+  srcDesktop: ""
 };
 
 export default function Newsletter(props: Props) {
-  const { title, description, form, layout } = { ...DEFAULT_PROPS, ...props };
-  const isReverse = layout?.content?.bgColor === "Reverse";
+  const { title, description, form, layout, srcMobile, srcDesktop } = { ...DEFAULT_PROPS, ...props };
+  const bgColorLayout = layout?.content?.bg;
+  const isReverse = bgColorLayout === "Reverse";
   const bordered = Boolean(layout?.content?.border);
 
   const headerLayout = (
@@ -56,10 +73,10 @@ export default function Newsletter(props: Props) {
   );
 
   const formLayout = form && (
-    <form action="/" class="flex flex-col gap-4">
+    <form action="/" class="flex flex-col gap-4 w-full">
       <div class="flex flex-col lg:flex-row gap-3">
         <input
-          class="input input-bordered lg:w-80"
+          class="input input-bordered w-full"
           type="text"
           placeholder={form.placeholder}
         />
@@ -84,13 +101,40 @@ export default function Newsletter(props: Props) {
     : "bg-transparent";
 
   return (
-    <div
+    <div class="flex flex-col pt-5 xl:container">
+      <div
       class={`${
         bordered
           ? isReverse ? "bg-secondary-content" : "bg-secondary"
           : bgLayout
-      } ${bordered ? "p-4 lg:p-16" : "p-0"}`}
+      } ${bordered ? "p-4 lg:p-16" : "p-0"} 
+      ${bgColorLayout === "Image" && "relative h-[360px]"} bg-no-repeat bg-cover bg-center`}
     >
+      {bgColorLayout === "Image" ? (
+        <Picture>
+          <Source
+            media="(max-width: 767px)"
+            src={srcMobile}
+            width={70}
+            height={70}
+          />
+          <Source
+            media="(min-width: 768px)"
+            src={srcDesktop}
+            width={240}
+            height={90}
+          />
+          <img
+            class="w-full absolute h-[360px] object-cover z-[-1]"
+            sizes="(max-width: 640px) 100vw, 30vw"
+            src={srcMobile}
+            alt={title ?? "Newsletter"}
+            decoding="async"
+            loading="lazy"
+          />
+        </Picture>
+      ) : ''}
+      
       {(!layout?.content?.alignment ||
         layout?.content?.alignment === "Center") && (
         <div
@@ -122,6 +166,10 @@ export default function Newsletter(props: Props) {
           </div>
         </div>
       )}
+    </div>
+      <div>
+        {props.textAboutUs && <TextAboutUs {...props.textAboutUs} />}
+      </div>
     </div>
   );
 }

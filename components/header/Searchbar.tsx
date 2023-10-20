@@ -2,7 +2,6 @@ import { headerHeight } from "$store/components/header/constants.ts";
 import Searchbar, {
   Props as SearchbarProps,
 } from "$store/components/search/Searchbar.tsx";
-import Modal from "$store/components/ui/Modal.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 
 export interface Props {
@@ -11,24 +10,26 @@ export interface Props {
 
 function SearchbarModal({ searchbar }: Props) {
   const { displaySearchPopup } = useUI();
+  const open = displaySearchPopup.value;
 
   if (!searchbar) {
     return null;
   }
 
   return (
-    <Modal
-      loading="lazy"
-      open={displaySearchPopup.value}
-      onClose={() => displaySearchPopup.value = false}
-    >
+    <>
       <div
-        class="absolute top-0 bg-base-100 container"
+        class={`${
+          open ? "block border-y border-base-200 shadow" : "hidden"
+        } absolute left-0 top-0 w-screen z-[99] bg-base-100`}
         style={{ marginTop: headerHeight }}
       >
-        <Searchbar {...searchbar} />
+        {open && (
+            <Searchbar {...searchbar} />
+        )}
       </div>
-    </Modal>
+    <div class={open ? "fixed top-24 left-0 z-[50] h-[100vh] w-[100vw] bg-[rgba(0,0,0,0.4)]" : ""} />
+  </>
   );
 }
 

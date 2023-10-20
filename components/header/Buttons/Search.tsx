@@ -8,16 +8,17 @@ export default function SearchButton() {
   return (
     <>
       <Button
-        class="btn-circle btn-sm btn-ghost hidden sm:block"
+        class="btn-sm btn-ghost hidden md:flex items-center sm:border divide-solid sm:border-black text-[#777777]"
         aria-label="search icon button"
         onClick={() => {
           displaySearchPopup.value = !displaySearchPopup.value;
         }}
       >
         <Icon id="MagnifyingGlass" size={24} strokeWidth={0.1} />
+        Procurar
       </Button>
       <Button
-        class="btn-circle btn-sm btn-ghost sm:hidden"
+        class="btn-circle btn-sm btn-ghost md:hidden"
         aria-label="search icon button"
         onClick={() => {
           displaySearchDrawer.value = !displaySearchDrawer.value;

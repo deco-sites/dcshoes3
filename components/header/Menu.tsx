@@ -1,19 +1,28 @@
-import Icon from "$store/components/ui/Icon.tsx";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
+import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import type { INavItem } from "./NavItem.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 
-export interface Props {
-  items: SiteNavigationElement[];
+export interface MenuTopProps {
+  label?: AvailableIcons;
+  text: string;
+  href: string;
 }
 
-function MenuItem({ item }: { item: SiteNavigationElement }) {
+export interface Props {
+  menuTop?: MenuTopProps[]
+  logo?: { src: ImageWidget; alt: string };
+  items: INavItem[];
+}
+
+function MenuItem({ item }: { item: INavItem }) {
   return (
     <div class="collapse collapse-plus">
       <input type="checkbox" />
-      <div class="collapse-title">{item.name}</div>
+      <div class="collapse-title">{item.label}</div>
       <div class="collapse-content">
         <ul>
           <li>
-            <a class="underline text-sm" href={item.url}>Ver todos</a>
+            <a class="underline text-sm" href={item.href}>Ver todos</a>
           </li>
           {item.children?.map((node) => (
             <li>

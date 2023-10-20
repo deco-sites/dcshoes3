@@ -8,6 +8,7 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { ComponentChildren } from "preact";
 import { lazy, Suspense } from "preact/compat";
+import Image from "apps/website/components/Image.tsx";
 
 const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
 const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
@@ -27,18 +28,28 @@ const Aside = (
     title: string;
     onClose?: () => void;
     children: ComponentChildren;
+    logo?: { src: LiveImage; alt: string }
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[100vw]">
-    <div class="flex justify-between items-center">
-      <h1 class="px-4 py-3">
-        <span class="font-medium text-2xl">{title}</span>
-      </h1>
+  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[70%]">
+    <div class="flex justify-center items-center relative">
       {onClose && (
-        <Button class="btn btn-ghost" onClick={onClose}>
+        <Button class="absolute left-2 top-2" onClick={onClose}>
           <Icon id="XMark" size={24} strokeWidth={2} />
         </Button>
       )}
+      <h1 class="px-4 py-3">
+        {title === "Menu"
+          ? (
+            <Image
+              src={logo?.src ?? ""}
+              alt={logo?.alt ?? ""}
+              width={50}
+              height={41}
+            />
+          )
+          : <span class="font-medium text-2xl">{title}</span>}
+      </h1>
     </div>
     <Suspense
       fallback={
@@ -64,6 +75,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
       }}
       aside={
         <Aside
+          logo={menu?.logo}
           onClose={() => {
             displayMenu.value = false;
             displaySearchDrawer.value = false;
@@ -71,11 +83,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
           title={displayMenu.value ? "Menu" : "Buscar"}
         >
           {displayMenu.value && <Menu {...menu} />}
-          {searchbar && displaySearchDrawer.value && (
-            <div class="w-screen">
-              <Searchbar {...searchbar} />
-            </div>
-          )}
+          {displaySearchDrawer.value && <Searchbar {...searchbar} />}
         </Aside>
       }
     >

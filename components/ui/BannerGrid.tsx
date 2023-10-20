@@ -48,6 +48,9 @@ export interface Props {
     desktop?: BorderRadius;
   };
   banners: Banner[];
+  layout: {
+    alignmentText: "Top" | "Bottom"
+  }
 }
 
 const MOBILE_COLUMNS = {
@@ -124,54 +127,82 @@ export default function BannnerGrid(props: Props) {
   } = { ...DEFAULT_PROPS, ...props };
 
   return (
-    <section class="container w-full px-4 md:px-0 mx-auto">
-      {title &&
-        (
-          <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
-            <h2 class="text-lg leading-5 font-semibold uppercase">
-              {title}
-            </h2>
+    <section class="xl:container w-full px-4 md:px-6 lg:md:px-8 mx-auto py-5 md:py-6">
+    {title &&
+      (
+        <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
+          <h2 class="text-lg leading-5 font-semibold uppercase">
+            {title}
+          </h2> 
 
-            <div class="bg-[#e5e5ea] h-[1px] w-full ml-4"></div>
-          </div>
-        )}
-      <div
-        class={`grid gap-4 md:gap-6 ${
-          MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
-        } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
-      >
-        {banners.map(({ href, srcMobile, srcDesktop, alt }) => (
-          <a
-            href={href}
-            class={`overflow-hidden ${
-              RADIUS_MOBILE[borderRadius.mobile ?? "none"]
-            } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
-          >
-            <Picture>
-              <Source
-                media="(max-width: 767px)"
-                src={srcMobile}
-                width={100}
-                height={100}
-              />
-              <Source
-                media="(min-width: 768px)"
-                src={srcDesktop ? srcDesktop : srcMobile}
-                width={250}
-                height={250}
-              />
-              <img
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 30vw"
-                src={srcMobile}
-                alt={alt}
-                decoding="async"
-                loading="lazy"
-              />
-            </Picture>
-          </a>
-        ))}
-      </div>
-    </section>
+          <div class="bg-[#e5e5ea] h-[1px] w-full ml-4"></div>
+        </div>
+      )}
+    <div
+      class={`grid gap-4 md:gap-6 ${
+        MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
+      } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
+    >
+      {banners.map(({ href, srcMobile, srcDesktop, alt, text, cta }) => (
+        <a
+          href={href}
+          class={`overflow-hidden ${
+            RADIUS_MOBILE[borderRadius?.mobile ?? "none"]
+          } ${RADIUS_DESKTOP[borderRadius?.desktop ?? "none"]} `}
+        >
+          { alignmentText === "Top" && (
+            <div class="flex flex-col justify-center items-center">
+              {text && (
+                <div class="py-4 text-[#181812] text-base font-medium overflow-hidden">
+                  <p>
+                    {text}
+                  </p>
+                  <div>
+                    <span class="inline-block h-[1px] w-[51%] bg-black absolute top-[98%] -translate-x-full hover:translate-x-0 transition-transform delay-[6000ms]" />
+                    <span class="inline-block h-[1px] w-[51%] bg-black absolute top-[98%] -translate-x-full hover:translate-x-0 transition-transform delay-[6000ms]" />
+                  </div>
+                </div>
+              )}
+              {cta && <Button>{cta}</Button>}
+            </div>
+          ) }
+          <Picture>
+            <Source
+              media="(max-width: 767px)"
+              src={srcMobile}
+              width={75}
+              height={75}
+            />
+            <Source
+              media="(min-width: 768px)"
+              src={srcDesktop ? srcDesktop : srcMobile}
+              width={250}
+              height={250}
+            />
+            <img
+              class="w-full"
+              sizes="(max-width: 640px) 100vw, 30vw"
+              src={srcMobile}
+              alt={alt}
+              decoding="async"
+              loading="lazy"
+            />
+          </Picture>
+          { alignmentText === "Bottom" && (
+            <div class="flex flex-col justify-center items-center">
+              {text && (
+                <div class="relative py-12 mb-4 text-[#181812] text-base font-semibold hover:underline">
+                <p>
+                  {text}
+                </p>
+              </div>
+              )}
+              {cta && <Button>{cta}</Button>}
+            </div>
+          ) }
+        </a>
+      ))}
+    </div>
+  </section>
   );
 }
