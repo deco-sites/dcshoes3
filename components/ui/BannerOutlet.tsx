@@ -107,14 +107,14 @@ export default function BannerOutlet({
               <Source
                 media="(max-width: 767px)"
                 src={srcMobile}
-                width={96}
-                height={30}
+                width={240}
+                height={53}
               />
               <Source
                 media="(min-width: 768px)"
                 src={srcDesktop ? srcDesktop : srcMobile}
-                width={366}
-                height={38}
+                width={400}
+                height={87.5}
               />
               <img
                 class="w-full"

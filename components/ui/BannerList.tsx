@@ -150,14 +150,14 @@ export default function BannerList({
               <Source
                 media="(max-width: 767px)"
                 src={srcMobile}
-                width={renderWidth(itemsPerLine.mobile ?? 0)}
-                height={150.5}
+                width={150}
+                height={150}
               />
               <Source
                 media="(min-width: 768px)"
                 src={srcDesktop}
-                width={renderWidth(itemsPerLine.desktop ?? 0)}
-                height={150.5}
+                width={150}
+                height={150}
               />
               <img
                 class={`w-full h-[550px] object-cover ${
@@ -181,7 +181,7 @@ export default function BannerList({
                   } flex flex-col p-2 gap-2 tracking-widest`}
                 >
                   {title && <h2 class="text-3xl">{title}</h2>}
-                  {description && <h2 class="text-3xl">{description}</h2>}
+                  {description && <h2 class="text-sm">{description}</h2>}
                   {cta && textPosition !== "Into"
                     ? <p class="text-xl text-black tracking-widest">{cta}</p>
                     : (

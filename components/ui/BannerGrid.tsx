@@ -92,7 +92,7 @@ const RADIUS_DESKTOP = {
 };
 
 const DEFAULT_PROPS: Props = {
-  title: "Summer bags",
+  title: "",
   banners: [
     {
       alt: "a",
@@ -182,8 +182,8 @@ export default function BannnerGrid(props: Props) {
             <Source
               media="(max-width: 767px)"
               src={srcMobile}
-              width={75}
-              height={75}
+              width={160}
+              height={160}
             />
             <Source
               media="(min-width: 768px)"
