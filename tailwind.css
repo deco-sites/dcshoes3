@@ -20,12 +20,68 @@
     margin: 0;
   }
 
+  
+  .input.inputSearch:focus {
+    outline: none;
+  }
+
+  .threeLinePhrase {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* line-height: 16px;      fallback 
+    max-height: 32px;      fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+
+  .hiddenMiddleTexto {
+    overflow: hidden; /* remove o estouro do elemento */
+    max-height: 76px;
+    @media (max-width: 768px) {
+      max-height: 90px;
+    }
+  }
+
   /* Disable scroll once drawer/modal is openned */
   body:has(.drawer-toggle:checked),
   body:has(.modal-toggle:checked) {
     overflow: hidden;
     height: 100vh;
   }
+  
+  section, ul {
+    scrollbar-color: gray transparent;   /* scroll thumb and track */
+  }
+  
+  section::-webkit-scrollbar, ul::-webkit-scrollbar {
+    height: 5px;               /* width of the entire scrollbar */
+  }
+
+  section::-webkit-scrollbar-track, ul::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+
+  section::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb {
+    background-color: gray;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid transparent;  /* creates padding around scroll thumb */
+  }
+
+}
+
+body section::-webkit-scrollbar {
+  width: 12px;
+  height: 3px;               /* width of the entire scrollbar */
+}
+
+body section::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+body section::-webkit-scrollbar-thumb {
+  background-color: gray;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
 }
 
 .group:disabled .group-disabled\:animate-progress {

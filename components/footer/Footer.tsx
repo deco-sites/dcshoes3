@@ -385,7 +385,7 @@ function Footer({
           <div class="flex flex-col gap-10">
             {_newsletter}
             {layout?.hide?.newsletter ? <></> : <Divider />}
-            <div class="flex flex-col md:flex-row gap-10 lg:gap-20 md:justify-between">
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
               <div class="flex flex-col gap-10 md:w-2/5 lg:pl-10">
                 {_locateMe}
                 {_payments}
