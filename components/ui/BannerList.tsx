@@ -17,7 +17,8 @@ export interface Banner {
    * @description When you click you go to
    */
   href: string;
-  text?: string;
+  title?: string;
+  description?: string;
   cta?: string;
 }
 
@@ -134,7 +135,7 @@ export default function BannerList({
         } md:grid-rows-none  ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
       >
         {banners.map((
-          { href, srcMobile, srcDesktop, alt, text, cta },
+          { href, srcMobile, srcDesktop, alt, title, description, cta },
           index,
         ) => (
           <a
@@ -170,7 +171,7 @@ export default function BannerList({
               />
             </Picture>
             <div class="absolute top-0 left-0 w-full h-full hover:bg-gray-600 hover:opacity-30" />
-            {text || cta
+            {title || cta
               ? (
                 <div
                   class={`${
@@ -179,7 +180,8 @@ export default function BannerList({
                       : "pt-4 text-black"
                   } flex flex-col p-2 gap-2 tracking-widest`}
                 >
-                  {text && <h2 class="text-3xl">{text}</h2>}
+                  {title && <h2 class="text-3xl">{title}</h2>}
+                  {description && <h2 class="text-3xl">{description}</h2>}
                   {cta && textPosition !== "Into"
                     ? <p class="text-xl text-black tracking-widest">{cta}</p>
                     : (

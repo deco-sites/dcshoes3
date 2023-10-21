@@ -15,6 +15,9 @@ export interface Banner {
    * @description When you click you go to
    */
   href: string;
+  title?: string
+  description?: string;
+  cta?: string
 }
 
 export type BorderRadius =
@@ -49,7 +52,7 @@ export interface Props {
   };
   banners: Banner[];
   layout: {
-    alignmentText: "Top" | "Bottom"
+    alignmentText: "Top" | "Bottom" | "Into"
   }
 }
 
@@ -98,6 +101,10 @@ const DEFAULT_PROPS: Props = {
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/82727553-f670-4e7c-b9c2-9452aed1955f",
       srcDesktop:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7b3a9d75-57a5-43cf-a3c5-f689a997f24e",
+      href: "#",
+      title: "",
+      description: "",
+      cta: "",
     },
     {
       alt: "a",
@@ -106,6 +113,10 @@ const DEFAULT_PROPS: Props = {
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/c5c6bdf6-5555-488c-8b14-719e4158dea6",
       srcDesktop:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/3e2b7824-d75c-4704-8d32-621bfc9b20cf",
+      href: "#",
+      title: "",
+      description: "",
+      cta: "",
     },
   ],
   borderRadius: {
@@ -116,6 +127,9 @@ const DEFAULT_PROPS: Props = {
     mobile: 2,
     desktop: 2,
   },
+  layout: {
+    alignmentText: "Bottom"
+  }
 };
 
 export default function BannnerGrid(props: Props) {
@@ -123,7 +137,8 @@ export default function BannnerGrid(props: Props) {
     title,
     itemsPerLine,
     borderRadius,
-    banners = [],
+    banners,
+    layout,
   } = { ...DEFAULT_PROPS, ...props };
 
   return (
@@ -143,27 +158,24 @@ export default function BannnerGrid(props: Props) {
         MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
       } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
     >
-      {banners.map(({ href, srcMobile, srcDesktop, alt, text, cta }) => (
+      {banners.map(({ href, srcMobile, srcDesktop, alt, title, description, cta }) => (
         <a
           href={href}
           class={`overflow-hidden ${
             RADIUS_MOBILE[borderRadius?.mobile ?? "none"]
           } ${RADIUS_DESKTOP[borderRadius?.desktop ?? "none"]} `}
         >
-          { alignmentText === "Top" && (
+          { layout.alignmentText === "Top" && (
             <div class="flex flex-col justify-center items-center">
-              {text && (
-                <div class="py-4 text-[#181812] text-base font-medium overflow-hidden">
-                  <p>
-                    {text}
-                  </p>
-                  <div>
-                    <span class="inline-block h-[1px] w-[51%] bg-black absolute top-[98%] -translate-x-full hover:translate-x-0 transition-transform delay-[6000ms]" />
-                    <span class="inline-block h-[1px] w-[51%] bg-black absolute top-[98%] -translate-x-full hover:translate-x-0 transition-transform delay-[6000ms]" />
-                  </div>
-                </div>
+              {title && <h2 class="text-3xl">{title}</h2>}
+              {description && <h2 class="text-sm">{description}</h2>}
+              {cta && layout.alignmentText !== "Into"
+                ? <p class="text-xl text-black tracking-widest">{cta}</p>
+                : (
+                  <Button class="text-2xl text-black bg-white tracking-widest">
+                    {cta}
+                  </Button>
               )}
-              {cta && <Button>{cta}</Button>}
             </div>
           ) }
           <Picture>
@@ -188,16 +200,28 @@ export default function BannnerGrid(props: Props) {
               loading="lazy"
             />
           </Picture>
-          { alignmentText === "Bottom" && (
+          { layout.alignmentText === "Bottom" && (
             <div class="flex flex-col justify-center items-center">
-              {text && (
-                <div class="relative py-12 mb-4 text-[#181812] text-base font-semibold hover:underline">
-                <p>
-                  {text}
-                </p>
-              </div>
-              )}
-              {cta && <Button>{cta}</Button>}
+              {title || cta ? (
+                <div
+                  class={`${
+                    layout.alignmentText === "Into"
+                      ? "absolute bottom-0 pb-4 items-center w-full text-white"
+                      : "pt-4 text-black"
+                  } flex flex-col p-2 gap-2 tracking-widest`}
+                >
+                  {title && <h2 class="text-3xl">{title}</h2>}
+                  {description && <h2 class="text-sm">{description}</h2>}
+                  {cta && layout.alignmentText !== "Into"
+                    ? <p class="text-xl text-black tracking-widest">{cta}</p>
+                    : (
+                      <Button class="text-2xl text-black bg-white tracking-widest">
+                        {cta}
+                      </Button>
+                    )}
+                </div>
+              )
+              : ""}
             </div>
           ) }
         </a>
