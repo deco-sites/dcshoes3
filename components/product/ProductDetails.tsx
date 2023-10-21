@@ -492,7 +492,7 @@ function Details(props: { page: ProductDetailsPage } & Props) {
             )}
           </span>
         </div>
-      </>
+      </div>
     );
   }
 
