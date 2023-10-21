@@ -102,73 +102,73 @@ export default function Newsletter(props: Props) {
 
   return (
     <div class="flex flex-col pt-5 xl:container">
-      <div
-      class={`${
-        bordered
-          ? isReverse ? "bg-secondary-content" : "bg-secondary"
-          : bgLayout
-      } ${bordered ? "p-4 lg:p-16" : "p-0"} 
-      ${bgColorLayout === "Image" && "relative h-[360px]"} bg-no-repeat bg-cover bg-center`}
-    >
-      {bgColorLayout === "Image" ? (
-        <Picture>
-          <Source
-            media="(max-width: 767px)"
-            src={srcMobile}
-            width={70}
-            height={70}
-          />
-          <Source
-            media="(min-width: 768px)"
-            src={srcDesktop}
-            width={240}
-            height={90}
-          />
-          <img
-            class="w-full absolute h-[360px] object-cover z-[-1]"
-            sizes="(max-width: 640px) 100vw, 30vw"
-            src={srcMobile}
-            alt={title ?? "Newsletter"}
-            decoding="async"
-            loading="lazy"
-          />
-        </Picture>
-      ) : ''}
-      
-      {(!layout?.content?.alignment ||
-        layout?.content?.alignment === "Center") && (
-        <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 text-white ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-center">
-            {formLayout}
-          </div>
-        </div>
-      )}
-      {layout?.content?.alignment === "Left" && (
-        <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-start">
-            {formLayout}
-          </div>
-        </div>
-      )}
-      {layout?.content?.alignment === "Side to side" && (
-        <div
-          class={`container flex flex-col rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-center">
-            {formLayout}
-          </div>
-        </div>
-      )}
-    </div>
       <div>
         {props.textAboutUs && <TextAboutUs {...props.textAboutUs} />}
+      </div>
+      <div
+        class={` mt-4 mb-9 ${
+          bordered
+            ? isReverse ? "bg-secondary-content" : "bg-secondary"
+            : bgLayout
+        } ${bordered ? "p-4 lg:p-16" : "p-0"} 
+        ${bgColorLayout === "Image" && "relative h-[360px]"} bg-no-repeat bg-cover bg-center`}
+      >
+        {bgColorLayout === "Image" ? (
+          <Picture>
+            <Source
+              media="(max-width: 767px)"
+              src={srcMobile}
+              width={70}
+              height={70}
+            />
+            <Source
+              media="(min-width: 768px)"
+              src={srcDesktop}
+              width={240}
+              height={90}
+            />
+            <img
+              class="w-full absolute h-[360px] object-cover z-[-1]"
+              sizes="(max-width: 640px) 100vw, 30vw"
+              src={srcMobile}
+              alt={title ?? "Newsletter"}
+              decoding="async"
+              loading="lazy"
+            />
+          </Picture>
+        ) : ''}
+        
+        {(!layout?.content?.alignment ||
+          layout?.content?.alignment === "Center") && (
+          <div
+            class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 text-white ${bgLayout}`}
+          >
+            {headerLayout}
+            <div class="flex justify-center">
+              {formLayout}
+            </div>
+          </div>
+        )}
+        {layout?.content?.alignment === "Left" && (
+          <div
+            class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          >
+            {headerLayout}
+            <div class="flex justify-start">
+              {formLayout}
+            </div>
+          </div>
+        )}
+        {layout?.content?.alignment === "Side to side" && (
+          <div
+            class={`container flex flex-col rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          >
+            {headerLayout}
+            <div class="flex justify-center">
+              {formLayout}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
