@@ -138,7 +138,7 @@ function ProductInfo({ page, layout, id }: { page: ProductDetailsPage } & Props)
               }% OFF`}
           </div>
           { listPrice && price && listPrice > price ? (
-            <div class="bg-[#ff8b24] h-6 w-16 text-white font-semibold text-center tracking-widest">SALE</div>
+            <div class="bg-[#000] h-6 w-16 text-white font-semibold text-center tracking-widest">SALE</div>
           ) : (
           <Image 
             src="https://d2e5mvjndnxyoo.cloudfront.net/Custom/Content/Flags/0039_flag_637507107698720811.png?p="
