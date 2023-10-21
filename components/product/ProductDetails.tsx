@@ -21,6 +21,7 @@ import type { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import MeasureTable from "$store/islands/MeasureTable.tsx";
 
 export interface Props {
   /** @title Integration */
@@ -388,8 +389,9 @@ function ProductInfo({ page, layout, id }: { page: ProductDetailsPage } & Props)
 function Details(props: { page: ProductDetailsPage } & Props) {
   const id = useId();
   const { page: { product: { image: images = [] } }, layout } = props;
+  const { page } = props;
   const variant = layout?.image ?? "slider";
-
+  
   /**
    * Product slider variant
    *
@@ -397,13 +399,14 @@ function Details(props: { page: ProductDetailsPage } & Props) {
    * On mobile, there's one single column with 3 rows. Note that the orders are different from desktop to mobile, that's why
    * we rearrange each cell with col-start- directives
    */
+  console.log(page?.breadcrumbList)
   if (variant === "slider") {
     return (
       <div class="flex flex-col">
          {/* Breadcrumb */}
          <div class="py-4">
           <Breadcrumb
-              itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
+              itemListElement={page?.breadcrumbList?.itemListElement.slice(0, -1)}
             />
          </div>
         <div

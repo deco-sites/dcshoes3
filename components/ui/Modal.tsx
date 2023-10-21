@@ -17,6 +17,7 @@ function Modal(props: Props) {
     children,
     open,
     onClose,
+    class: _class = "",
     loading = "lazy",
   } = props;
   const lazy = useSignal(loading === "lazy" && !open);
@@ -47,7 +48,9 @@ function Modal(props: Props) {
         onChange={(e) => e.currentTarget.checked === false && onClose?.()}
       />
       <div class="modal">
-        {!lazy.value && children}
+        <div class={`modal-box ${_class}`}>
+          {!lazy.value && children}
+        </div>
         <label class="modal-backdrop" for={id}>Close</label>
       </div>
     </>
