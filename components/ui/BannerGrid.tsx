@@ -167,10 +167,10 @@ export default function BannnerGrid(props: Props) {
         >
           { layout.alignmentText === "Top" && (
             <div class="flex flex-col justify-center items-center">
-              {title && <h2 class="text-3xl">{title}</h2>}
+              {title && <h2 class="text-[22px]">{title}</h2>}
               {description && <h2 class="text-sm">{description}</h2>}
               {cta && (
-                  <button class="btn text-2xl text-black bg-white tracking-widest">
+                  <button class="btn text-black bg-white tracking-widest">
                     {cta}
                   </button>
               )}
@@ -199,10 +199,12 @@ export default function BannnerGrid(props: Props) {
             />
           </Picture>
           { layout.alignmentText === "Bottom" && (
-            <div class="flex flex-col justify-center items-center">
-              {title && <h2 class="text-3xl">{title}</h2>}
+            <div class="flex flex-col justify-center items-start gap-4 mt-4">
+              {title && <h2 class="text-[22px] font-semibold">{title}</h2>}
               {description && <h2 class="text-sm">{description}</h2>}
-              {cta && <p class="text-xl text-black tracking-widest">{cta}</p>}
+              {cta && 
+                <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">{cta}</p>
+              }
             </div>
           ) }
         </a>

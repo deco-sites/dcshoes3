@@ -128,7 +128,6 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
       />
       <figure
         class="relative overflow-hidden"
-        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
         {/* Wishlist button */}
         <div
@@ -165,7 +164,7 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
             height={HEIGHT}
             class={`bg-base-100 col-span-full row-span-full rounded w-full ${
               l?.onMouseOver?.image == "Zoom image"
-                ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
+                ? "duration-100 transition-scale lg:group-hover:scale-125"
                 : ""
             }`}
             sizes="(max-width: 640px) 50vw, 20vw"

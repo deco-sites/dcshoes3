@@ -49,7 +49,39 @@
     overflow: hidden;
     height: 100vh;
   }
+
+  .shopNowArrow:before, .shopNowArrow:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 2rem;
+    height: 1.6rem;
+    font-weight: bolder;
+    background-image: url('https://boardriders.core.dcg.com.br/Custom/Content/Themes/DCShoes/Images/arrow.svg');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .shopNowArrow:before {
+    left: -3rem;
+    opacity: 0;
+  }
+
+  .shopNowArrow:after {
+    margin-left: 2rem;
+  }
+
+  .shopNowArrow:hover:after {
+    right: -3rem;
+    opacity: 0;
+  }
   
+  .shopNowArrow:hover:before {
+    left: 0;
+    opacity: 1;
+  }
+
   section, ul {
     scrollbar-color: gray transparent;   /* scroll thumb and track */
   }

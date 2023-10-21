@@ -171,27 +171,31 @@ export default function BannerList({
               />
             </Picture>
             <div class="absolute top-0 left-0 w-full h-full hover:bg-gray-600 hover:opacity-30" />
-            {title || cta
+            {textPosition === "Into"
               ? (
                 <div
-                  class={`${
-                    textPosition === "Into"
-                      ? "absolute bottom-0 pb-4 items-center w-full text-white"
-                      : "pt-4 text-black"
-                  } flex flex-col p-2 gap-2 tracking-widest`}
+                  class="absolute bottom-0 pb-4 items-center w-full text-white flex flex-col p-2 gap-2 tracking-widest"
                 >
                   {title && <h2 class="text-3xl">{title}</h2>}
                   {description && <h2 class="text-sm">{description}</h2>}
-                  {cta && textPosition !== "Into"
-                    ? <p class="text-xl text-black tracking-widest">{cta}</p>
-                    : (
+                  {cta && (
                       <Button class="text-2xl text-black bg-white tracking-widest">
                         {cta}
                       </Button>
                     )}
                 </div>
               )
-              : ""}
+              : (
+                <div
+                  class="pt-4 text-black flex flex-col p-2 gap-2 tracking-widest"
+                >
+                  {title && <h2 class="text-[22px] font-semibold">{title}</h2>}
+                  {description && <h2 class="text-sm">{description}</h2>}
+                  {cta && (
+                    <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">{cta}</p>
+                  )}
+                </div>
+              )}
           </a>
         ))}
       </div>

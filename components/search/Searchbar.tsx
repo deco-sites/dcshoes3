@@ -188,7 +188,7 @@ function Searchbar({
               </span>
               <div class="flex flex-row flex-wrap pb-8">
                 {products.map((product, index) => (
-                  <div class="max-w-[370px]">
+                  <div class="max-w-[370px] max-h-[120px]">
                     <ProductCardRow product={product} />
                   </div>
                 ))}
