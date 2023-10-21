@@ -91,21 +91,17 @@ function ProductInfo({ page, layout, id }: { page: ProductDetailsPage } & Props)
 
   return (
     <>
-      {/* Breadcrumb */}
-      <Breadcrumb
-        itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
-      />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
-        <div>
+        {/* <div>
           {gtin && (
             <span class="text-sm text-base-300">
               Cod. {gtin}
             </span>
           )}
-        </div>
+        </div> */}
         <h1>
-          <span class="font-medium text-xl capitalize">
+          <span class="font-semibold text-xl text-[#181812]">
             {layout?.name === "concat"
               ? `${isVariantOf?.name} ${name}`
               : layout?.name === "productGroup"
@@ -115,24 +111,184 @@ function ProductInfo({ page, layout, id }: { page: ProductDetailsPage } & Props)
         </h1>
       </div>
       {/* Prices */}
-      <div class="mt-4">
+      <div class="mt-4 gap-4 flex flex-col">
         <div class="flex flex-row gap-2 items-center">
           {(listPrice ?? 0) > price && (
-            <span class="line-through text-base-300 text-xs">
+            <span class="line-through text-[#181812] text-sm font-semibold">
               {formatPrice(listPrice, offers?.priceCurrency)}
             </span>
           )}
-          <span class="font-medium text-xl text-secondary">
+          <span class="font-medium text-base text-[#77777]">
             {formatPrice(price, offers?.priceCurrency)}
           </span>
         </div>
-        <span class="text-sm text-base-300">
+        <span class="text-sm text-[#181812">
           {installments}
         </span>
+        <div class="text-[#181812] text-sm">
+          à vista com 5%
+          de desconto no boleto
+        </div>
+        <div class="w-full flex justify-start pt-4">
+          <div class=" text-[#444] bg-[#eee] px-2 h-[20px] text-xs font-bold mr-2">
+            {`-${
+              (100 - (100 / (listPrice as number / price as number)))
+                .toFixed(0)
+              }% OFF`}
+          </div>
+          { listPrice && price && listPrice > price ? (
+            <div class="bg-[#ff8b24] h-6 w-16 text-white font-semibold text-center tracking-widest">SALE</div>
+          ) : (
+          <Image 
+            src="https://d2e5mvjndnxyoo.cloudfront.net/Custom/Content/Flags/0039_flag_637507107698720811.png?p="
+            alt="Tag New Product"
+            width={10}
+            height={10}
+          />
+          ) }
+        </div>
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
         <ProductSelector product={product} id={id} />
+      </div>
+      {/* Modal MEASURE TABLE */}
+      <div>
+        <MeasureTable>
+          <div class="flex flex-col items-center gap-4">
+            <p class="text-[#777] font-semibold text-sm underline">TABELA DE MEDIDAS</p>
+            <p class="text-sm">VESTUÁRIO</p>
+            <table>
+              <thead>
+                <tr>
+                  <td class="text-center border border-white bg-[#777] text-white"><span class="text-xs font-bold leading-tight">NUMERAÇÃO</span></td>
+                  <td class="text-center border border-white bg-[#777] text-white"><span class="text-xs font-bold leading-tight">BUSTO (cm)</span></td>
+                  <td class="text-center border border-white bg-[#777] text-white"><span class="text-xs font-bold leading-tight">CINTURA (cm)</span></td>
+                  <td class="text-center border border-white bg-[#777] text-white"><span class="text-xs font-bold leading-tight">QUADRIL (cm)</span></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">PP</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">75 - 78</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">59 - 62</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">81 - 84</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">P</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">79 - 86</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">63 - 70</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">85 - 92</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">M </span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">87 - 90 </span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">71 - 74 </span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">93 - 96 </span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">G</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">95 - 102</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">79 - 86</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">101 - 108</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">GG</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">103 - 110</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">87 - 94</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">109 - 116</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">34</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">75 - 78</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">59 - 62</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">81 - 84</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">36</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">78 - 81</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">62 - 65</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">84 - 87</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">38</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">83 - 86</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">67 - 70</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">89 - 92</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">40</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">87 - 90</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">71 - 74</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">93 - 96</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">42</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">91 - 94</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">75 - 78</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">97 - 100</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-[#777] font-semibold text-sm underline">TABELA DE MEDIDAS</p>
+            <p class="text-sm">WETSUIT</p>
+            <table>
+              <thead>
+                <tr>
+                  <td class="text-center border border-white bg-[#777] text-white"><span><b>NUMERAÇÃO</b></span></td>
+                  <td class="text-center border border-white bg-[#777] text-white"><span><b>ALTURA (cm)</b></span></td>
+                  <td class="text-center border border-white bg-[#777] text-white"><span><b>PESO (kg)</b></span></td>
+                  <td class="text-center border border-white bg-[#777] text-white"><span><b>PEITO (cm)</b></span></td>
+                  <td class="text-center border border-white bg-[#777] text-white"><span><b>ENTREPERNAS (cm)</b></span></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">4</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">160 - 165</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">41 - 48</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">77 - 82</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">68 - 71</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">6</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">163 - 167</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">45 - 52</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">80 - 85</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">69 - 72</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">8</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">165 - 170</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">50 - 57</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">82 - 87</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">71 - 73</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">10</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">167 - 173</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">54 - 61</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">86 - 91</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">72 - 75</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">12</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">169 - 176</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">58 - 64</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">88 - 94</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">73 - 76</span></td>
+                </tr>
+                <tr>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">14</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">171 - 180</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">62 - 68</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">92 - 98</span></td>
+                  <td class="text-center bg-[#eee] border border-white"><span class="text-xs font-medium">77 - 80</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </MeasureTable>
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
@@ -198,7 +354,7 @@ function ProductInfo({ page, layout, id }: { page: ProductDetailsPage } & Props)
           : <OutOfStock productID={productID} />}
       </div>
       {/* Shipping Simulation */}
-      <div class="mt-8">
+      {/* <div class="mt-8">
         {platform === "vtex" && (
           <ShippingSimulation
             items={[{
@@ -208,21 +364,7 @@ function ProductInfo({ page, layout, id }: { page: ProductDetailsPage } & Props)
             }]}
           />
         )}
-      </div>
-      {/* Description card */}
-      <div class="mt-4 sm:mt-6">
-        <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div
-                class="ml-2 mt-2"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            </details>
-          )}
-        </span>
-      </div>
+      </div> */}
       {/* Analytics Event */}
       <SendEventOnLoad
         event={{
@@ -257,7 +399,13 @@ function Details(props: { page: ProductDetailsPage } & Props) {
    */
   if (variant === "slider") {
     return (
-      <>
+      <div class="flex flex-col">
+         {/* Breadcrumb */}
+         <div class="py-4">
+          <Breadcrumb
+              itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
+            />
+         </div>
         <div
           id={id}
           class="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_40vw_40vw] sm:grid-rows-1 sm:justify-center"
@@ -333,6 +481,17 @@ function Details(props: { page: ProductDetailsPage } & Props) {
           </div>
         </div>
         <SliderJS rootId={id}></SliderJS>
+        {/* Description card */}
+        <div class="mt-4 sm:mt-6 mx-4">
+          <span class="text-sm">
+            {page?.product?.description && (
+              <details>
+                <summary class="cursor-pointer">Descrição</summary>
+                <div class="ml-2 mt-2">{page?.product?.description}</div>
+              </details>
+            )}
+          </span>
+        </div>
       </>
     );
   }
