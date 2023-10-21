@@ -1,7 +1,7 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import HeaderSections from "$store/components/ui/SectionHeader.tsx";
-import Button from "$store/components/ui/Button.tsx";
+import HeaderSections from "deco-sites/storefront/components/ui/SectionHeader.tsx";
+import Button from "deco-sites/storefront/components/ui/Button.tsx";
 
 /**
  * @titleBy alt
@@ -160,7 +160,7 @@ export default function BannerList({
                 height={150}
               />
               <img
-                class={`w-full h-[550px] object-cover ${
+                class={`w-full h-[350px] object-cover ${
                   RADIUS_MOBILE[borderRadius.mobile ?? "none"]
                 } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]}`}
                 sizes="(max-width: 640px) 100vw, 30vw"

@@ -62,11 +62,15 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
     offers,
     isVariantOf,
   } = product;
+
+  console.log(product, "PRODUCTROW")
+
   const id = `product-card-${productID}`;
+  const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
   const [front, back] = images ?? [];
   const { listPrice, price, installments } = useOffer(offers);
-  const possibilities = useVariantPossibilities(product);
+  const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
   const l = layout;
@@ -78,7 +82,7 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
     <li>
       <a href={link}>
         <Avatar
-          variant={link === url ? "active" : "default"}
+          variant={link === url ? "active" : link ? "default" : "disabled"}
           content={value}
         />
       </a>
@@ -93,7 +97,7 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
       {l?.basics?.ctaText || "Ver produto"}
     </a>
   );
-
+  
   return (
     <div
       id={id}
@@ -248,9 +252,9 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
             {l?.hide?.productName
               ? ""
               : (
-                <h2 class="text-base lg:text-lg text-base-content font-bold bg-white threeLinePhrase">
-                  {name}
-                </h2>
+                <h2 class="text-base lg:text-lg text-base-content font-bold bg-white threeLinePhrase"
+                  dangerouslySetInnerHTML={{ __html: name ?? "" }}
+                />
               )}
           </div>
         )}

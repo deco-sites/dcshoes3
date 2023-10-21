@@ -8,7 +8,7 @@ export const useVariantPossibilities = (
 ): Possibilities => {
   const possibilities: Possibilities = {};
   const selectedSpecs = new Map(
-    (selected.additionalProperty ?? [])
+    (selected?.additionalProperty ?? [])
       .map((s) => [s.name, s] as const),
   );
 

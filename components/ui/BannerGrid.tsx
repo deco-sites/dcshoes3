@@ -52,7 +52,7 @@ export interface Props {
   };
   banners: Banner[];
   layout: {
-    alignmentText: "Top" | "Bottom" | "Into"
+    alignmentText: "Top" | "Bottom"
   }
 }
 
@@ -169,12 +169,10 @@ export default function BannnerGrid(props: Props) {
             <div class="flex flex-col justify-center items-center">
               {title && <h2 class="text-3xl">{title}</h2>}
               {description && <h2 class="text-sm">{description}</h2>}
-              {cta && layout.alignmentText !== "Into"
-                ? <p class="text-xl text-black tracking-widest">{cta}</p>
-                : (
-                  <Button class="text-2xl text-black bg-white tracking-widest">
+              {cta && (
+                  <button class="btn text-2xl text-black bg-white tracking-widest">
                     {cta}
-                  </Button>
+                  </button>
               )}
             </div>
           ) }
@@ -202,26 +200,9 @@ export default function BannnerGrid(props: Props) {
           </Picture>
           { layout.alignmentText === "Bottom" && (
             <div class="flex flex-col justify-center items-center">
-              {title || cta ? (
-                <div
-                  class={`${
-                    layout.alignmentText === "Into"
-                      ? "absolute bottom-0 pb-4 items-center w-full text-white"
-                      : "pt-4 text-black"
-                  } flex flex-col p-2 gap-2 tracking-widest`}
-                >
-                  {title && <h2 class="text-3xl">{title}</h2>}
-                  {description && <h2 class="text-sm">{description}</h2>}
-                  {cta && layout.alignmentText !== "Into"
-                    ? <p class="text-xl text-black tracking-widest">{cta}</p>
-                    : (
-                      <Button class="text-2xl text-black bg-white tracking-widest">
-                        {cta}
-                      </Button>
-                    )}
-                </div>
-              )
-              : ""}
+              {title && <h2 class="text-3xl">{title}</h2>}
+              {description && <h2 class="text-sm">{description}</h2>}
+              {cta && <p class="text-xl text-black tracking-widest">{cta}</p>}
             </div>
           ) }
         </a>

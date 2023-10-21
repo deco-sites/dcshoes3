@@ -3,6 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$1 from "./loaders/Layouts/ProductCardRow.tsx";
 import * as $$$$$$0 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$1 from "./sections/Miscellaneous/SaleBanner.tsx";
 import * as $$$$$$2 from "./sections/Miscellaneous/CookieConsent.tsx";
@@ -39,6 +40,7 @@ import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 const manifest = {
   "loaders": {
     "deco-sites/dcshoes3/loaders/Layouts/ProductCard.tsx": $$$0,
+    "deco-sites/dcshoes3/loaders/Layouts/ProductCardRow.tsx": $$$1,
   },
   "sections": {
     "deco-sites/dcshoes3/sections/Category/CategoryBanner.tsx": $$$$$$21,

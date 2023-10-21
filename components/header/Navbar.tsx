@@ -45,7 +45,7 @@ function Navbar({ items, searchbar, logo, hide }: {
             style={{ minHeight: navbarHeight }}
             aria-label="Store logo"
           >
-            <Image class="w-[38px] h-[38px]" src={logo.src} alt={logo.alt} width={22} height={13} />
+            <Image class="w-[38px] h-[38px]" src={logo.src} alt={logo.alt} width={20} height={20} />
           </a>
         )}
 
@@ -75,7 +75,7 @@ function Navbar({ items, searchbar, logo, hide }: {
               aria-label="Store logo"
               class="block px-4 w-[160px]"
             >
-              <Image class="w-[100px] h-[52px]" src={logo.src} alt={logo.alt} width={22} height={13} />
+              <Image class="w-[50px] h-[42px]" src={logo.src} alt={logo.alt} width={25} height={25} />
             </a>
           )}
         </div>

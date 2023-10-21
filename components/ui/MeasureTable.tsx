@@ -1,8 +1,9 @@
 import Modal from "./Modal.tsx";
 import { useSignal } from "@preact/signals";
-import Button from "$store/components/ui/Button.tsx";
+import Button from "deco-sites/storefront/components/ui/Button.tsx";
+import { JSX } from "preact/jsx-runtime";
 
-export default function MeasureTable({ children }) {
+export default function MeasureTable({ children }: { children: JSX.Element}) {
   const open = useSignal(false)
   return (
     <>

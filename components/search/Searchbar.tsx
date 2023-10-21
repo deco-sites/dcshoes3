@@ -67,6 +67,7 @@ function Searchbar({
   const { products = [], searches = [] } = payload.value ?? {};
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
+  const notFound = !hasProducts && !hasTerms;
 
   useEffect(() => {
     if (displaySearchPopup.value === true) {
@@ -125,53 +126,77 @@ function Searchbar({
         </div>
       </form>
 
-      <div
-        class={`overflow-y-scroll ${!hasProducts && !hasTerms ? "hidden" : ""}`}
-      >
-        <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
-          <div class="flex flex-col gap-6">
+      {notFound
+        ? (
+          <div class="flex flex-col gap-4 w-full">
             <span
-              class="font-medium text-xl"
+              class="font-medium text-xl text-center"
               role="heading"
               aria-level={3}
             >
-              MAIS VENDIDOS
+              Nenhum resultado encontrado
             </span>
-            <ul id="search-suggestion" class="flex flex-col gap-6">
-              {searches.map(({ term }) => (
-                <li>
-                  <a href={`/s?q=${term}`} class="flex gap-4 items-center">
-                    <span>
-                      <Icon
-                        id="ChevronRight"
-                        size={20}
-                        strokeWidth={0.01}
-                      />
-                    </span>
-                    <span dangerouslySetInnerHTML={{ __html: term }} />
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <span class="text-center text-base-300">
+              Vamos tentar de outro jeito? Verifique a ortografia ou use um
+              termo diferente
+            </span>
           </div>
-          <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
-            <span
-              class="font-medium text-xl"
-              role="heading"
-              aria-level={3}
+        )
+        : (
+        <div
+          class="overflow-y-scroll"
+        >
+          <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
+            <div 
+              class={hasTerms ? "flex flex-col gap-6" : "hidden"}
             >
-              PRODUTOS
-            </span>
-            <div class="flex flex-row flex-wrap pb-8">
-              {products.map((product, index) => (
-                <div class="max-w-[370px]">
-                  <ProductCardRow product={product} />
-                </div>
-              ))}
+              <span
+                class="font-medium text-xl"
+                role="heading"
+                aria-level={3}
+              >
+                MAIS VENDIDOS
+              </span>
+              <ul id="search-suggestion" class="flex flex-col gap-6">
+                {searches.map(({ term }) => (
+                  <li>
+                    <a href={`/s?q=${term}`} class="flex gap-4 items-center">
+                      <span>
+                        <Icon
+                          id="ChevronRight"
+                          size={20}
+                          strokeWidth={0.01}
+                        />
+                      </span>
+                      <span dangerouslySetInnerHTML={{ __html: term }} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div 
+              class={hasProducts
+                ? "flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden"
+                : "hidden"}
+            >
+              <span
+                class="font-medium text-xl"
+                role="heading"
+                aria-level={3}
+              >
+                PRODUTOS
+              </span>
+              <div class="flex flex-row flex-wrap pb-8">
+                {products.map((product, index) => (
+                  <div class="max-w-[370px]">
+                    <ProductCardRow product={product} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Header from "$store/components/ui/SectionHeader.tsx";
+import Header from "deco-sites/storefront/components/ui/SectionHeader.tsx";
 
 /**
  * @titleBy alt
