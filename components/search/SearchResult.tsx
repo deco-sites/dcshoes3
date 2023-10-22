@@ -1,6 +1,6 @@
 import { SendEventOnLoad } from "$store/components/Analytics.tsx";
 import { Layout as CardLayout } from "$store/components/product/ProductCard.tsx";
-import Filters from "$store/components/search/Filters.tsx";
+import FiltersDesk from "$store/components/search/FiltersDesk.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import SearchControls from "$store/islands/SearchControls.tsx";
 import { useOffer } from "$store/sdk/useOffer.ts";
@@ -54,7 +54,7 @@ function Result({
         <div class="flex flex-row">
           {layout?.variant === "aside" && filters.length > 0 && (
             <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
+              <FiltersDesk filters={filters} />
             </aside>
           )}
           <div class="flex-grow">
