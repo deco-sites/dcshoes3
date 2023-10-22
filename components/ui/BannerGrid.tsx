@@ -58,7 +58,7 @@ export interface Props {
 
 const MOBILE_COLUMNS = {
   1: "grid-cols-1",
-  2: "grid-cols-2",
+  2: "grid-cols-1",
 };
 
 const DESKTOP_COLUMNS = {

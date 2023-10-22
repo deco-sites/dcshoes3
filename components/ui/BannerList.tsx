@@ -2,6 +2,7 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import HeaderSections from "deco-sites/storefront/components/ui/SectionHeader.tsx";
 import Button from "deco-sites/storefront/components/ui/Button.tsx";
+import Slider from "$store/components/ui/Slider.tsx";
 
 /**
  * @titleBy alt
@@ -39,8 +40,6 @@ export interface Props {
    */
   itemsPerLine: {
     /** @default 3 */
-    mobile?: 0 | 1 | 2 | 3 | 4;
-    /** @default 3 */
     desktop?: 0 | 1 | 2 | 3 | 4;
   };
   /**
@@ -56,14 +55,6 @@ export interface Props {
   textPosition: "Top" | "Bottom" | "Into";
   preload?: boolean;
 }
-
-const MOBILE_COLUMNS = {
-  0: "grid-rows-0",
-  1: "grid-rows-1",
-  2: "grid-rows-2",
-  3: "grid-rows-3",
-  4: "grid-rows-4",
-};
 
 const DESKTOP_COLUMNS = {
   0: "md:grid-cols-0",
@@ -107,6 +98,76 @@ function renderWidth(itemsPerLine: number) {
   }
 }
 
+export function BannerItem(
+  { href, srcMobile, srcDesktop, alt, title, description, cta },
+  textPosition,
+  preload,
+  borderRadius,
+  index
+) {
+  return (
+    <a
+      href={href}
+      class={`relative w-[98%] ${
+        textPosition === "Top"
+          ? "flex-col-reverse"
+          : textPosition === "Bottom" && "flex-col"
+      }  `}
+    >
+      <Picture preload={index === 0 && preload}>
+        <Source
+          media="(max-width: 767px)"
+          src={srcMobile}
+          width={150}
+          height={150}
+        />
+        <Source
+          media="(min-width: 768px)"
+          src={srcDesktop}
+          width={150}
+          height={150}
+        />
+        <img
+          class={`w-full h-[350px] object-cover ${
+            RADIUS_MOBILE[borderRadius?.mobile ?? "none"]
+          } ${RADIUS_DESKTOP[borderRadius?.desktop ?? "none"]}`}
+          sizes="(max-width: 640px) 100vw, 30vw"
+          src={srcMobile}
+          alt={alt}
+          decoding="async"
+          loading="lazy"
+        />
+      </Picture>
+      <div class="absolute top-0 left-0 w-full h-full hover:bg-gray-600 hover:opacity-30" />
+      {textPosition === "Into"
+        ? (
+          <div
+            class="absolute bottom-0 pb-4 items-center w-full text-white flex flex-col p-2 gap-2 tracking-widest"
+          >
+            {title && <h2 class="text-3xl">{title}</h2>}
+            {description && <h2 class="text-sm">{description}</h2>}
+            {cta && (
+                <Button class="text-2xl text-black bg-white tracking-widest">
+                  {cta}
+                </Button>
+              )}
+          </div>
+        )
+        : (
+          <div
+            class="pt-4 text-black flex flex-col p-2 gap-2 tracking-widest"
+          >
+            {title && <h2 class="text-[22px] font-semibold">{title}</h2>}
+            {description && <h2 class="text-sm">{description}</h2>}
+            {cta && (
+              <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">{cta}</p>
+            )}
+          </div>
+        )}
+    </a>
+  )
+}
+
 export default function BannerList({
   title,
   itemsPerLine,
@@ -122,82 +183,25 @@ export default function BannerList({
         alignment={"left"}
       />
       <div
-        // style={{
-        //     gridTemplateColumns: `repeat(${itemsPerLine
-        //       ?.desktop as number}, 1fr)`,
-        //   }}
-        class={`${
-          !itemsPerLine?.mobile && "hidden"
-        } px-4 pt-5 mb-12 grid min-w-fit w-[${
-          banners.length * 186
-        }px] md:w-auto gap-12 md:gap-2 ${
-          MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
-        } md:grid-rows-none  ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
+        class={`hidden px-4 pt-5 mb-12 md:grid min-w-fit
+        w-[${banners.length * 186}px] md:w-auto gap-12 md:gap-2  md:grid-rows-none  
+        ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
       >
         {banners.map((
-          { href, srcMobile, srcDesktop, alt, title, description, cta },
+          banner,
           index,
         ) => (
-          <a
-            href={href}
-            class={`relative w-[98%] ${
-              textPosition === "Top"
-                ? "flex-col-reverse"
-                : textPosition === "Bottom" && "flex-col"
-            }  `}
-          >
-            <Picture preload={index === 0 && preload}>
-              <Source
-                media="(max-width: 767px)"
-                src={srcMobile}
-                width={150}
-                height={150}
-              />
-              <Source
-                media="(min-width: 768px)"
-                src={srcDesktop}
-                width={150}
-                height={150}
-              />
-              <img
-                class={`w-full h-[350px] object-cover ${
-                  RADIUS_MOBILE[borderRadius.mobile ?? "none"]
-                } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]}`}
-                sizes="(max-width: 640px) 100vw, 30vw"
-                src={srcMobile}
-                alt={alt}
-                decoding="async"
-                loading="lazy"
-              />
-            </Picture>
-            <div class="absolute top-0 left-0 w-full h-full hover:bg-gray-600 hover:opacity-30" />
-            {textPosition === "Into"
-              ? (
-                <div
-                  class="absolute bottom-0 pb-4 items-center w-full text-white flex flex-col p-2 gap-2 tracking-widest"
-                >
-                  {title && <h2 class="text-3xl">{title}</h2>}
-                  {description && <h2 class="text-sm">{description}</h2>}
-                  {cta && (
-                      <Button class="text-2xl text-black bg-white tracking-widest">
-                        {cta}
-                      </Button>
-                    )}
-                </div>
-              )
-              : (
-                <div
-                  class="pt-4 text-black flex flex-col p-2 gap-2 tracking-widest"
-                >
-                  {title && <h2 class="text-[22px] font-semibold">{title}</h2>}
-                  {description && <h2 class="text-sm">{description}</h2>}
-                  {cta && (
-                    <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">{cta}</p>
-                  )}
-                </div>
-              )}
-          </a>
+          <BannerItem {...banner} preload={preload} index={index} textPosition={textPosition} borderRadius={borderRadius} />
         ))}
+      </div>
+      <div class="grid md:hidden grid-cols-[28px_1fr_28px]">
+        <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
+        {banners.map((banner, index) => (
+            <Slider.Item index={index} class="carousel-item w-full">
+              <BannerItem {...banner} preload={preload} index={index} textPosition={textPosition} borderRadius={borderRadius} />
+            </Slider.Item>
+          ))}
+        </Slider>
       </div>
     </section>
   );
