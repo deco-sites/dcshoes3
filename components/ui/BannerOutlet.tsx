@@ -75,7 +75,7 @@ export default function BannerOutlet({
 }: Props) {
   return (
     <section
-      class={`xl:container w-full mx-auto ${fullWidth ? "px-0" : "px-5"} my-5`}
+      class={`hidden md:block xl:container w-full mx-auto ${fullWidth ? "px-0" : "px-5"} my-5`}
     >
       <Header
         title={title || ""}
@@ -109,8 +109,8 @@ export default function BannerOutlet({
               <Source
                 media="(max-width: 767px)"
                 src={srcMobile}
-                width={240}
-                height={53}
+                width={0}
+                height={0}
               />
               <Source
                 media="(min-width: 768px)"

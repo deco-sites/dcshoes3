@@ -49,8 +49,8 @@ function Navbar({ items, searchbar, logo, hide }: {
               class="w-[38px] h-[38px]"
               src={logo.src}
               alt={logo.alt}
-              width={20}
-              height={20}
+              width={15}
+              height={15}
             />
           </a>
         )}
@@ -61,7 +61,7 @@ function Navbar({ items, searchbar, logo, hide }: {
             href="/login"
             aria-label="Log in"
           >
-            <Icon id="User" size={28} strokeWidth={0.4} />
+            <Icon id="User" size={20} strokeWidth={0.4} />
           </a>
         )}
 

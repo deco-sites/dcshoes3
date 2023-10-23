@@ -23,6 +23,16 @@ export interface Banner {
   cta?: string;
 }
 
+export interface BannerProps {
+  banner: Banner
+  textPosition: "Top" | "Bottom" | "Into";
+  preload?: boolean;
+  borderRadius: {
+    mobile?: BorderRadius;
+    desktop?: BorderRadius;
+  };
+}
+
 export type BorderRadius =
   | "none"
   | "sm"
@@ -98,13 +108,13 @@ function renderWidth(itemsPerLine: number) {
   }
 }
 
-export function BannerItem(
-  { href, srcMobile, srcDesktop, alt, title, description, cta },
+export function BannerItem({
+  banner: { href, srcMobile, srcDesktop, alt, title, description, cta },
   textPosition,
   preload,
   borderRadius,
-  index,
-) {
+  index
+}: BannerProps) {
   return (
     <a
       href={href}
@@ -118,8 +128,8 @@ export function BannerItem(
         <Source
           media="(max-width: 767px)"
           src={srcMobile}
-          width={150}
-          height={150}
+          width={110}
+          height={110}
         />
         <Source
           media="(min-width: 768px)"
@@ -172,10 +182,10 @@ export default function BannerList({
   borderRadius,
   banners = [],
   textPosition,
-  preload,
+  preload = false,
 }: Props) {
   return (
-    <section class="xl:container w-full mx-auto overflow-x-auto md:overflow-visible mt-7">
+    <section class="xl:container w-full mx-auto overflow-x-auto md:overflow-visible mt-3 md:mt-7">
       <HeaderSections
         title={title}
         alignment={"left"}
@@ -192,7 +202,7 @@ export default function BannerList({
           index,
         ) => (
           <BannerItem
-            {...banner}
+            banner={banner}
             preload={preload}
             index={index}
             textPosition={textPosition}
@@ -200,12 +210,12 @@ export default function BannerList({
           />
         ))}
       </div>
-      <div class="grid md:hidden grid-cols-[28px_1fr_28px]">
+      <div class="grid md:hidden grid-cols-[28px_1fr_28px] my-5">
         <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
           {banners.map((banner, index) => (
             <Slider.Item index={index} class="carousel-item w-full">
               <BannerItem
-                {...banner}
+                banner={banner}
                 preload={preload}
                 index={index}
                 textPosition={textPosition}

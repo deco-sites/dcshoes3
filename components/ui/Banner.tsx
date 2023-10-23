@@ -83,7 +83,7 @@ export default function Banner({
 }: Props) {
   return (
     <section
-      class={`xl:container w-full mx-auto pb-6 md:pb-12 ${
+      class={`xl:container w-full mx-auto py-2 md:pb-12 ${
         fullWidth ? "px-0" : "px-5"
       }`}
     >
@@ -103,23 +103,23 @@ export default function Banner({
               RADIUS_MOBILE[borderRadius.mobile ?? "none"]
             } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
           >
-            <Picture>
+            <Picture preload={false}>
               <Source
                 media="(max-width: 767px)"
-                src={srcMobile}
-                width={206}
-                height={90}
+                src={srcMobile ?? ""}
+                width={152}
+                height={68}
               />
               <Source
                 media="(min-width: 768px)"
-                src={srcDesktop ? srcDesktop : srcMobile}
+                src={srcDesktop ?? ""}
                 width={384}
                 height={168}
               />
               <img
                 class="w-full"
                 sizes="(max-width: 640px) 100vw, 30vw"
-                src={srcMobile}
+                src={srcMobile ?? ""}
                 alt={alt}
                 decoding="async"
                 loading="lazy"
