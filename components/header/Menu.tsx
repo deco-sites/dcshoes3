@@ -9,7 +9,7 @@ export interface MenuTopProps {
 }
 
 export interface Props {
-  menuTop?: MenuTopProps[]
+  menuTop?: MenuTopProps[];
   logo?: { src: ImageWidget; alt: string };
   items: INavItem[];
 }

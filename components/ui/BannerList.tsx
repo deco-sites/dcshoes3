@@ -103,7 +103,7 @@ export function BannerItem(
   textPosition,
   preload,
   borderRadius,
-  index
+  index,
 ) {
   return (
     <a
@@ -141,31 +141,29 @@ export function BannerItem(
       <div class="absolute top-0 left-0 w-full h-full hover:bg-gray-600 hover:opacity-30" />
       {textPosition === "Into"
         ? (
-          <div
-            class="absolute bottom-0 pb-4 items-center w-full text-white flex flex-col p-2 gap-2 tracking-widest"
-          >
+          <div class="absolute bottom-0 pb-4 items-center w-full text-white flex flex-col p-2 gap-2 tracking-widest">
             {title && <h2 class="text-3xl">{title}</h2>}
             {description && <h2 class="text-sm">{description}</h2>}
             {cta && (
-                <Button class="text-2xl text-black bg-white tracking-widest">
-                  {cta}
-                </Button>
-              )}
+              <Button class="text-2xl text-black bg-white tracking-widest">
+                {cta}
+              </Button>
+            )}
           </div>
         )
         : (
-          <div
-            class="pt-4 text-black flex flex-col p-2 gap-2 tracking-widest"
-          >
+          <div class="pt-4 text-black flex flex-col p-2 gap-2 tracking-widest">
             {title && <h2 class="text-[22px] font-semibold">{title}</h2>}
             {description && <h2 class="text-sm">{description}</h2>}
             {cta && (
-              <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">{cta}</p>
+              <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">
+                {cta}
+              </p>
             )}
           </div>
         )}
     </a>
-  )
+  );
 }
 
 export default function BannerList({
@@ -184,21 +182,35 @@ export default function BannerList({
       />
       <div
         class={`hidden px-4 pt-5 mb-12 md:grid min-w-fit
-        w-[${banners.length * 186}px] md:w-auto gap-12 md:gap-2  md:grid-rows-none  
+        w-[${
+          banners.length * 186
+        }px] md:w-auto gap-12 md:gap-2  md:grid-rows-none  
         ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
       >
         {banners.map((
           banner,
           index,
         ) => (
-          <BannerItem {...banner} preload={preload} index={index} textPosition={textPosition} borderRadius={borderRadius} />
+          <BannerItem
+            {...banner}
+            preload={preload}
+            index={index}
+            textPosition={textPosition}
+            borderRadius={borderRadius}
+          />
         ))}
       </div>
       <div class="grid md:hidden grid-cols-[28px_1fr_28px]">
         <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
-        {banners.map((banner, index) => (
+          {banners.map((banner, index) => (
             <Slider.Item index={index} class="carousel-item w-full">
-              <BannerItem {...banner} preload={preload} index={index} textPosition={textPosition} borderRadius={borderRadius} />
+              <BannerItem
+                {...banner}
+                preload={preload}
+                index={index}
+                textPosition={textPosition}
+                borderRadius={borderRadius}
+              />
             </Slider.Item>
           ))}
         </Slider>

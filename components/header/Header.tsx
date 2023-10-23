@@ -8,7 +8,6 @@ import { headerHeight } from "./constants.ts";
 import ExtraLinks from "$store/components/header/ExtraLinks.tsx";
 import { AvailableIcons } from "$store/components/ui/Icon.tsx";
 
-
 export interface NavItem {
   label: string;
   href: string;
@@ -46,7 +45,7 @@ export interface Props {
   extraLinks?: {
     left?: extraLinkItem[];
     right?: extraLinkItem[];
-  }
+  };
 
   /**
    * @title Navigation items
@@ -57,13 +56,13 @@ export interface Props {
   /** @title Logo */
   logo?: { src: ImageWidget; alt: string };
 
-  menuTop?: MenuTopProps[]
+  menuTop?: MenuTopProps[];
   hide?: {
     account: false | true;
     wishlist: false | true;
     alert: false | true;
-    extraLinks: false | true
-  }
+    extraLinks: false | true;
+  };
 }
 
 const DEFAULT_VALUE = {
@@ -73,7 +72,7 @@ const DEFAULT_VALUE = {
     alert: false,
     extraLinks: false,
   },
-}
+};
 
 function Header({
   alerts,
@@ -97,12 +96,12 @@ function Header({
         >
           <div class="bg-base-100 fixed w-full z-50">
             {!hide?.alert && <Alert alerts={alerts} />}
-            {!hide?.extraLinks && <ExtraLinks extraLinks={extraLinks} /> }
+            {!hide?.extraLinks && <ExtraLinks extraLinks={extraLinks} />}
             <Navbar
               items={navItems}
               searchbar={searchbar && { ...searchbar, platform }}
               logo={logo}
-              hide={hide} 
+              hide={hide}
             />
           </div>
         </Drawers>

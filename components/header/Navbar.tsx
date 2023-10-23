@@ -20,8 +20,8 @@ function Navbar({ items, searchbar, logo, hide }: {
     account: false | true;
     wishlist: false | true;
     alert: false | true;
-    extraLinks: false | true
-  }
+    extraLinks: false | true;
+  };
   logo?: { src: string; alt: string };
 }) {
   const platform = usePlatform();
@@ -45,7 +45,13 @@ function Navbar({ items, searchbar, logo, hide }: {
             style={{ minHeight: navbarHeight }}
             aria-label="Store logo"
           >
-            <Image class="w-[38px] h-[38px]" src={logo.src} alt={logo.alt} width={20} height={20} />
+            <Image
+              class="w-[38px] h-[38px]"
+              src={logo.src}
+              alt={logo.alt}
+              width={20}
+              height={20}
+            />
           </a>
         )}
 
@@ -75,7 +81,13 @@ function Navbar({ items, searchbar, logo, hide }: {
               aria-label="Store logo"
               class="block px-4 w-[160px]"
             >
-              <Image class="w-[50px] h-[42px]" src={logo.src} alt={logo.alt} width={25} height={25} />
+              <Image
+                class="w-[50px] h-[42px]"
+                src={logo.src}
+                alt={logo.alt}
+                width={25}
+                height={25}
+              />
             </a>
           )}
         </div>
@@ -85,17 +97,17 @@ function Navbar({ items, searchbar, logo, hide }: {
         <div class="flex-none w-44 flex items-center justify-end gap-2">
           <SearchButton />
           <Searchbar searchbar={searchbar} />
-          { !hide?.account && (
+          {!hide?.account && (
             <a
-            class="btn btn-circle btn-sm btn-ghost"
-            href="/login"
-            aria-label="Log in"
-          >
-            <Icon id="User" size={24} strokeWidth={0.4} />
-          </a>
-          ) }
-          { !hide?.wishlist && (
-             <a
+              class="btn btn-circle btn-sm btn-ghost"
+              href="/login"
+              aria-label="Log in"
+            >
+              <Icon id="User" size={24} strokeWidth={0.4} />
+            </a>
+          )}
+          {!hide?.wishlist && (
+            <a
               class="btn btn-circle btn-sm btn-ghost"
               href="/wishlist"
               aria-label="Wishlist"
@@ -107,7 +119,7 @@ function Navbar({ items, searchbar, logo, hide }: {
                 fill="none"
               />
             </a>
-          ) }
+          )}
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
           {platform === "wake" && <CartButtonWake />}

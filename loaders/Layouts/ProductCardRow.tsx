@@ -1,4 +1,6 @@
-import ProductCardRow, { Layout } from "$store/components/product/ProductCardRow.tsx";
+import ProductCardRow, {
+  Layout,
+} from "$store/components/product/ProductCardRow.tsx";
 
 interface Props {
   /** @title Product Card layout props */

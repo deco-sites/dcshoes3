@@ -41,7 +41,9 @@ function NavItem({ item }: { item: INavItem }) {
                 {children.map((node) => (
                   <li class="p-6">
                     <a class="hover:underline" href={node.href}>
-                      <span class="text-sm uppercase font-semibold">{node.label}</span>
+                      <span class="text-sm uppercase font-semibold">
+                        {node.label}
+                      </span>
                     </a>
 
                     <ul class="flex flex-col gap-1 mt-4">

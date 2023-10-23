@@ -28,7 +28,7 @@ const Aside = (
     title: string;
     onClose?: () => void;
     children: ComponentChildren;
-    logo?: { src: LiveImage; alt: string }
+    logo?: { src: LiveImage; alt: string };
   },
 ) => (
   <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[70%]">

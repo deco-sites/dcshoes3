@@ -25,15 +25,15 @@ export type Section = {
 
 export interface SocialItem {
   label:
-  | "Discord"
-  | "Facebook"
-  | "Instagram"
-  | "Linkedin"
-  | "Tiktok"
-  | "Spotify"
-  | "Youtube"
-  | "Pinterest"
-  | "Twitter";
+    | "Discord"
+    | "Facebook"
+    | "Instagram"
+    | "Linkedin"
+    | "Tiktok"
+    | "Spotify"
+    | "Youtube"
+    | "Pinterest"
+    | "Twitter";
   link: string;
 }
 
@@ -49,7 +49,8 @@ export interface MobileApps {
 }
 
 export interface RegionOptions {
-  label?: "Global"
+  label?:
+    | "Global"
     | "Global2";
   href?: string;
   text?: string;
@@ -86,7 +87,7 @@ export interface Layout {
     regionOptions?: boolean;
     extraLinks?: boolean;
     backToTheTop?: boolean;
-    locateMe?: boolean
+    locateMe?: boolean;
   };
 }
 
@@ -94,13 +95,14 @@ export interface LocateMeProps {
   title?: string;
   input?: {
     placeholder?: string;
-  }
+  };
   cta?: {
-    label: "Locate"
-    | "Locate2";
+    label:
+      | "Locate"
+      | "Locate2";
     /** @description Remember that the href is the compose href + the query string 'locality' with cep */
     href: string;
-  }
+  };
 }
 
 export interface Props {
@@ -185,7 +187,7 @@ function Footer({
     cta: {
       label: "Locate",
       href: "nossas-lojas",
-    }
+    },
   },
   payments = {
     title: "Formas de pagamento",
@@ -212,7 +214,7 @@ function Footer({
       regionOptions: false,
       extraLinks: false,
       backToTheTop: false,
-      locateMe: false
+      locateMe: false,
     },
   },
 }: Props) {
@@ -233,9 +235,7 @@ function Footer({
         layout?.variation == "Variation 3"}
     />
   );
-  const _locateMe = layout?.hide?.locateMe
-    ? <></>
-    : <LocateMe {...locateMe} />
+  const _locateMe = layout?.hide?.locateMe ? <></> : <LocateMe {...locateMe} />;
   const _social = layout?.hide?.socialLinks
     ? <></>
     : <Social content={social} vertical={layout?.variation == "Variation 3"} />;

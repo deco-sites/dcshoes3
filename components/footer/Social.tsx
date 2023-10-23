@@ -1,5 +1,5 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-import type { SocialItem } from "./Footer.tsx"
+import type { SocialItem } from "./Footer.tsx";
 
 export default function Social(
   { content, vertical = false }: {

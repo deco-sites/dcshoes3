@@ -75,7 +75,7 @@ export default function BannerOutlet({
 }: Props) {
   return (
     <section
-      class={`xl:container w-full mx-auto ${fullWidth ? "px-0" : "px-5"}`}
+      class={`xl:container w-full mx-auto ${fullWidth ? "px-0" : "px-5"} my-5`}
     >
       <Header
         title={title || ""}
@@ -83,7 +83,8 @@ export default function BannerOutlet({
         fontSize={"Large"}
         alignment={"center"}
       />
-      {/* {title &&
+      {
+        /* {title &&
         (
           <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
             <h2 class="text-lg leading-5 font-semibold uppercase">
@@ -92,7 +93,8 @@ export default function BannerOutlet({
 
             <div class="bg-[#e5e5ea] h-[1px] w-full ml-4"></div>
           </div>
-        )} */}
+        )} */
+      }
       <div
         class={`grid gap-4 md:gap-6 grid-cols-1`}
       >

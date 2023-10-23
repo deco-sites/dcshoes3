@@ -29,15 +29,16 @@ function VariantSelector({ product, id }: Props) {
   return (
     <ul class="flex flex-col gap-4">
       {Object.keys(possibilities)?.map((name) => {
-         const arrayPossibilities = Object.entries(
+        const arrayPossibilities = Object.entries(
           possibilities[name],
         );
         const selected = findSelected(arrayPossibilities, url);
         return (
-          <li class={`flex flex-col gap-2 ${
-            /[amanho]/gi.test(name) &&
-            "border border-black divide-solid px-2 py-4"
-          }`}
+          <li
+            class={`flex flex-col gap-2 ${
+              /[amanho]/gi.test(name) &&
+              "border border-black divide-solid px-2 py-4"
+            }`}
           >
             <span class="text-sm">{`${name}: ${selected}`}</span>
             <ul class="flex flex-row gap-3">
@@ -61,7 +62,7 @@ function VariantSelector({ product, id }: Props) {
               })}
             </ul>
           </li>
-        )
+        );
       })}
     </ul>
   );

@@ -3,16 +3,15 @@ import { useSignal } from "@preact/signals";
 
 export interface Props {
   button?: {
-    text: string
-  }
-  
+    text: string;
+  };
 }
 
 function ContactForm({ button }: Props) {
-  
-
   return (
-    <div
+    <div>
+      {
+        /* <div
       href={`https://api.whatsapp.com/send/?phone=${phone}&text&type=phone_number&app_absent=0`}
       class="fixed bottom-6 right-6 z-40"
       aria-label="Contact Form"
@@ -22,10 +21,12 @@ function ContactForm({ button }: Props) {
         aria-label="Contact Form"
         onClick={}
       >
-        {/* <Icon id="" size={32} stroke="0.01" /> */}
+        <Icon id="" size={32} stroke="0.01" />
       </button>
+    */
+      }
     </div>
   );
 }
 
-export default WhatsApp;
+export default ContactForm;

@@ -34,6 +34,7 @@ export interface Layout {
     showSkuSelector?: boolean;
     showCardShadow?: boolean;
     showCta?: boolean;
+    showQuickView?: boolean
   };
 }
 
@@ -76,6 +77,15 @@ function ProductCard(
   const { listPrice, price, installments } = useOffer(offers);
   const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
+  
+  let colors = []
+  if (possibilities?.cor) {
+    colors = Object.entries(possibilities?.cor)
+  } else if (possibilities?.Cor) {
+    colors = Object.entries(possibilities?.Cor)
+  } else if (possibilities?.COR) {
+    colors = Object.entries(possibilities?.COR)
+  }
 
   const l = layout;
   const align =
@@ -136,7 +146,7 @@ function ProductCard(
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
         {/* Wishlist button */}
-        <div
+        {/* <div
           class={`absolute top-2 z-10
           ${
             l?.elementsPositions?.favoriteIcon === "Top left"
@@ -156,7 +166,7 @@ function ProductCard(
               productID={productID}
             />
           )}
-        </div>
+        </div> */}
         {/* Product Images */}
         <a
           href={url && relative(url)}
@@ -178,6 +188,7 @@ function ProductCard(
             loading={preload ? "eager" : "lazy"}
             decoding="async"
           />
+
           {(!l?.onMouseOver?.image ||
             l?.onMouseOver?.image == "Change image") && (
             <Image
@@ -207,8 +218,25 @@ function ProductCard(
             </ul>
           )}
           {l?.onMouseOver?.showCta && cta}
+          {l?.onMouseOver?.showQuickView && (
+            <p class="text-[#777777] hidden md:block">QUICK VIEW</p>
+          )}
         </figcaption>
       </figure>
+      {/* Tags */}
+      {/* <div class="flex flex-row justify-between py-2">
+        <p>{ colors.length > 1 ? `${colors.length} Cores` : '1 Cor' }</p>
+        { listPrice && price && listPrice > price ? (
+          <div class="bg-[#000] h-6 w-16 text-white font-semibold text-center tracking-widest">SALE</div>
+        ) : (
+        <Image 
+          src="https://d2e5mvjndnxyoo.cloudfront.net/Custom/Content/Flags/0038_flag_637273220324832855.jpg?p="
+          alt="Tag New Product"
+          width={10}
+          height={10}
+        />
+        ) }
+      </div> */}
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-4">
         {/* SKU Selector */}
@@ -233,7 +261,7 @@ function ProductCard(
             <div class="flex flex-col gap-0">
               {l?.hide?.productName ? "" : (
                 <h2
-                  class="truncate text-base lg:text-lg text-base-content"
+                  class="truncate text-base lg:text-lg font-semibold text-[#181812]"
                   dangerouslySetInnerHTML={{ __html: name ?? "" }}
                 />
               )}
@@ -248,29 +276,29 @@ function ProductCard(
         {l?.hide?.allPrices ? "" : (
           <div class="flex flex-col gap-2">
             <div
-              class={`flex flex-col gap-0 ${
-                l?.basics?.oldPriceSize === "Normal"
-                  ? "lg:flex-row lg:gap-2"
-                  : ""
-              } ${align === "center" ? "justify-center" : "justify-start"}`}
+              class={`flex gap-0 ${align === "center" ? "justify-center" : "justify-start"}`}
             >
               <div
-                class={`line-through text-base-300 text-xs ${
-                  l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
-                }`}
+                class="line-through text-[#777777] font-semibold opacity-80 text-base lg:text-xl pr-2"
               >
                 {formatPrice(listPrice, offers?.priceCurrency)}
               </div>
-              <div class="text-accent text-base lg:text-xl">
+              <div class="text-[#777777] text-base lg:text-xl font-semibold">
                 {formatPrice(price, offers?.priceCurrency)}
               </div>
             </div>
             {l?.hide?.installments
               ? ""
               : (
-                <div class="text-base-300 text-sm lg:text-base truncate">
-                  ou {installments}
-                </div>
+                <>
+                  <div class="text-[#777777] text-sm lg:text-base font-semibold opacity-80">
+                    {installments}
+                  </div>
+                  <div class="text-[#181812] font-semibold">
+                    à vista com 5%
+                    de desconto no boleto
+                  </div>
+                </>
               )}
           </div>
         )}

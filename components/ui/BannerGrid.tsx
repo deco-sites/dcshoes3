@@ -15,9 +15,9 @@ export interface Banner {
    * @description When you click you go to
    */
   href: string;
-  title?: string
+  title?: string;
   description?: string;
-  cta?: string
+  cta?: string;
 }
 
 export type BorderRadius =
@@ -52,8 +52,8 @@ export interface Props {
   };
   banners: Banner[];
   layout: {
-    alignmentText: "Top" | "Bottom"
-  }
+    alignmentText: "Top" | "Bottom";
+  };
 }
 
 const MOBILE_COLUMNS = {
@@ -96,7 +96,6 @@ const DEFAULT_PROPS: Props = {
   banners: [
     {
       alt: "a",
-      href: "a",
       srcMobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/82727553-f670-4e7c-b9c2-9452aed1955f",
       srcDesktop:
@@ -108,7 +107,6 @@ const DEFAULT_PROPS: Props = {
     },
     {
       alt: "a",
-      href: "a",
       srcMobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/c5c6bdf6-5555-488c-8b14-719e4158dea6",
       srcDesktop:
@@ -128,8 +126,8 @@ const DEFAULT_PROPS: Props = {
     desktop: 2,
   },
   layout: {
-    alignmentText: "Bottom"
-  }
+    alignmentText: "Bottom",
+  },
 };
 
 export default function BannnerGrid(props: Props) {
@@ -143,73 +141,78 @@ export default function BannnerGrid(props: Props) {
 
   return (
     <section class="xl:container w-full px-4 md:px-6 lg:md:px-8 mx-auto py-5 md:py-6">
-    {title &&
-      (
-        <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
-          <h2 class="text-lg leading-5 font-semibold uppercase">
-            {title}
-          </h2> 
+      {title &&
+        (
+          <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
+            <h2 class="text-lg leading-5 font-semibold uppercase">
+              {title}
+            </h2>
 
-          <div class="bg-[#e5e5ea] h-[1px] w-full ml-4"></div>
-        </div>
-      )}
-    <div
-      class={`grid gap-4 md:gap-6 ${
-        MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
-      } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
-    >
-      {banners.map(({ href, srcMobile, srcDesktop, alt, title, description, cta }) => (
-        <a
-          href={href}
-          class={`overflow-hidden ${
-            RADIUS_MOBILE[borderRadius?.mobile ?? "none"]
-          } ${RADIUS_DESKTOP[borderRadius?.desktop ?? "none"]} `}
-        >
-          { layout.alignmentText === "Top" && (
-            <div class="flex flex-col justify-center items-center">
-              {title && <h2 class="text-[22px]">{title}</h2>}
-              {description && <h2 class="text-sm">{description}</h2>}
-              {cta && (
+            <div class="bg-[#e5e5ea] h-[1px] w-full ml-4"></div>
+          </div>
+        )}
+      <div
+        class={`grid gap-4 md:gap-6 ${
+          MOBILE_COLUMNS[itemsPerLine?.mobile ?? 2]
+        } ${DESKTOP_COLUMNS[itemsPerLine?.desktop ?? 4]}`}
+      >
+        {banners.map((
+          { href, srcMobile, srcDesktop, alt, title, description, cta },
+        ) => (
+          <a
+            href={href}
+            class={`overflow-hidden ${
+              RADIUS_MOBILE[borderRadius?.mobile ?? "none"]
+            } ${RADIUS_DESKTOP[borderRadius?.desktop ?? "none"]} `}
+          >
+            {layout.alignmentText === "Top" && (
+              <div class="flex flex-col justify-center items-center">
+                {title && <h2 class="text-[22px]">{title}</h2>}
+                {description && <h2 class="text-sm">{description}</h2>}
+                {cta && (
                   <button class="btn text-black bg-white tracking-widest">
                     {cta}
                   </button>
-              )}
-            </div>
-          ) }
-          <Picture>
-            <Source
-              media="(max-width: 767px)"
-              src={srcMobile}
-              width={160}
-              height={160}
-            />
-            <Source
-              media="(min-width: 768px)"
-              src={srcDesktop ? srcDesktop : srcMobile}
-              width={250}
-              height={250}
-            />
-            <img
-              class="w-full"
-              sizes="(max-width: 640px) 100vw, 30vw"
-              src={srcMobile}
-              alt={alt}
-              decoding="async"
-              loading="lazy"
-            />
-          </Picture>
-          { layout.alignmentText === "Bottom" && (
-            <div class="flex flex-col justify-center items-start gap-4 mt-4">
-              {title && <h2 class="text-[22px] font-semibold">{title}</h2>}
-              {description && <h2 class="text-sm">{description}</h2>}
-              {cta && 
-                <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">{cta}</p>
-              }
-            </div>
-          ) }
-        </a>
-      ))}
-    </div>
-  </section>
+                )}
+              </div>
+            )}
+            <Picture>
+              <Source
+                media="(max-width: 767px)"
+                src={srcMobile}
+                width={160}
+                height={160}
+              />
+              <Source
+                media="(min-width: 768px)"
+                src={srcDesktop ? srcDesktop : srcMobile}
+                width={250}
+                height={250}
+              />
+              <img
+                class="w-full"
+                sizes="(max-width: 640px) 100vw, 30vw"
+                src={srcMobile}
+                alt={alt}
+                decoding="async"
+                loading="lazy"
+              />
+            </Picture>
+            {layout.alignmentText === "Bottom" && (
+              <div class="flex flex-col justify-center items-start gap-4 mt-4">
+                {title && <h2 class="text-[22px] font-semibold">{title}</h2>}
+                {description && <h2 class="text-sm">{description}</h2>}
+                {cta &&
+                  (
+                    <p class="text-black font-semibold relative inline-block pr-12 transition-all duration-300 hover:pr-0 hover:pl-20 shopNowArrow">
+                      {cta}
+                    </p>
+                  )}
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
+    </section>
   );
 }

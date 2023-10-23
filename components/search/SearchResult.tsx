@@ -39,8 +39,8 @@ function Result({
   layout,
   cardLayout,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
+  console.log(page, "PAGE");
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
-
   return (
     <>
       <div class="container px-4 sm:py-10">

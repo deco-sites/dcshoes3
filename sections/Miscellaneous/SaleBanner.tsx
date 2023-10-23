@@ -23,12 +23,11 @@ export interface SaleBannerItem {
      */
     href: string;
   };
-
 }
 
 export interface Props {
   saleBanner: SaleBannerItem[];
-    /**
+  /**
    * @title Autoplay interval
    * @description time (in seconds) to start the carousel autoplay
    */
@@ -37,7 +36,6 @@ export interface Props {
     textPosition?: "Center" | "Left";
   };
 }
-
 
 function Buttons() {
   return (
@@ -68,39 +66,41 @@ export default function SaleBanner({
   saleBanner = [
     {
       text: "Time left for a campaign to end wth a link",
-      link: { text: "Click me", href: "/hello" }
-    }
+      link: { text: "Click me", href: "/hello" },
+    },
   ],
   layout = { textPosition: "Center" },
-  interval
+  interval,
 }: Props) {
-  const id = useId()
+  const id = useId();
   return (
     <div id={id} class="border-t border-b border-black">
-        <div class="container grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1px_1fr_1px]">
+      <div class="container grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1px_1fr_1px]">
         <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
-          { saleBanner.map(({ link, text }: SaleBannerItem, index: number) => (
+          {saleBanner.map(({ link, text }: SaleBannerItem, index: number) => (
             <Slider.Item
               index={index}
-              class={`flex ${layout.textPosition === "Center" ? "justify-center items-center" : "justify-start items-center"} w-full gap-4 carousel-item`}
+              class={`flex ${
+                layout.textPosition === "Center"
+                  ? "justify-center items-center"
+                  : "justify-start items-center"
+              } w-full gap-4 carousel-item`}
             >
               <div class="flex py-2 md:py-0 flex-col md:flex-row items-center">
-                <span 
+                <span
                   class="font-bold text-sm mr-2"
                   dangerouslySetInnerHTML={{ __html: text ?? "" }}
                 />
-                <a class="text-sm underline"
-                  href={link?.href}
-                >
+                <a class="text-sm underline" href={link?.href}>
                   {link?.text}
                 </a>
               </div>
             </Slider.Item>
-          )) }
+          ))}
         </Slider>
         <Buttons />
         <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
       </div>
     </div>
-  )
+  );
 }

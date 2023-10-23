@@ -1,10 +1,9 @@
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
 import Icon from "$store/components/ui/Icon.tsx";
-import type { LocateMeProps } from "./Footer.tsx"
+import type { LocateMeProps } from "./Footer.tsx";
 
 export default function LocateMe({ title, input, cta }: LocateMeProps) {
-
   const loading = useSignal(false);
 
   const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = (e) => {
@@ -13,10 +12,10 @@ export default function LocateMe({ title, input, cta }: LocateMeProps) {
     try {
       loading.value = true;
 
-      const cep =
-        (e.currentTarget.elements.namedItem("cep") as RadioNodeList)?.value;
+      const cep = (e.currentTarget.elements.namedItem("cep") as RadioNodeList)
+        ?.value;
 
-      window.location.pathname = `/${cta?.href ?? ""}?locality=${cep}`
+      window.location.pathname = `/${cta?.href ?? ""}?locality=${cep}`;
     } finally {
       loading.value = false;
     }
@@ -36,15 +35,15 @@ export default function LocateMe({ title, input, cta }: LocateMeProps) {
             placeholder={input?.placeholder || "Digite seu email"}
           />
           <button
-              type="submit"
-              class="disabled:loading border-none bg-transparent absolute right-2 top-2 hover:text-[#505050] hover:fill-[#505050]"
-              disabled={loading}
-            >
-              <Icon id={cta?.label ?? "Locate"} size={30} />
-              {/* {cta?.text || "Inscrever"} */}
-            </button>
+            type="submit"
+            class="disabled:loading border-none bg-transparent absolute right-2 top-2 hover:text-[#505050] hover:fill-[#505050]"
+            disabled={loading}
+          >
+            <Icon id={cta?.label ?? "Locate"} size={30} />
+            {/* {cta?.text || "Inscrever"} */}
+          </button>
         </div>
       </form>
     </div>
-  )
+  );
 }

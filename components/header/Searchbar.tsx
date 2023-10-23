@@ -24,12 +24,14 @@ function SearchbarModal({ searchbar }: Props) {
         } absolute left-0 top-0 w-screen z-[99] bg-base-100`}
         style={{ marginTop: headerHeight }}
       >
-        {open && (
-            <Searchbar {...searchbar} />
-        )}
+        {open && <Searchbar {...searchbar} />}
       </div>
-    <div class={open ? "fixed top-24 left-0 z-[50] h-[100vh] w-[100vw] bg-[rgba(0,0,0,0.4)]" : ""} />
-  </>
+      <div
+        class={open
+          ? "fixed top-24 left-0 z-[50] h-[100vh] w-[100vw] bg-[rgba(0,0,0,0.4)]"
+          : ""}
+      />
+    </>
   );
 }
 

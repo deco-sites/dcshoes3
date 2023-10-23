@@ -68,7 +68,7 @@ function FilterValues({ key, values }: FilterToggle) {
 function FiltersDesk({ filters }: Props) {
   return (
     <ul class="flex flex-col gap-6 p-4">
-       {filters
+      {filters
         .filter(isToggle)
         .map((filter) => (
           <li class="flex flex-col gap-4">
@@ -80,7 +80,7 @@ function FiltersDesk({ filters }: Props) {
                 </p>
               </div>
               <div class="collapse-content bg-white">
-                <ul class=" pt-4">
+                <ul class="pt-4">
                   <li>
                     <FilterValues {...filter} />
                   </li>

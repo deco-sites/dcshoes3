@@ -63,7 +63,7 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
     isVariantOf,
   } = product;
 
-  console.log(product, "PRODUCTROW")
+  console.log(product, "PRODUCTROW");
 
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
@@ -97,7 +97,7 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
       {l?.basics?.ctaText || "Ver produto"}
     </a>
   );
-  
+
   return (
     <div
       id={id}
@@ -126,9 +126,7 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
           },
         }}
       />
-      <figure
-        class="relative overflow-hidden"
-      >
+      <figure class="relative overflow-hidden">
         {/* Wishlist button */}
         <div
           class={`absolute top-2 z-10
@@ -248,13 +246,12 @@ function ProductCardRow({ product, preload, itemListName, layout }: Props) {
 
         {l?.hide?.productName ? "" : (
           <div class="flex flex-col gap-0 w-[200px]">
-            {l?.hide?.productName
-              ? ""
-              : (
-                <h2 class="text-base lg:text-lg text-base-content font-bold bg-white threeLinePhrase"
-                  dangerouslySetInnerHTML={{ __html: name ?? "" }}
-                />
-              )}
+            {l?.hide?.productName ? "" : (
+              <h2
+                class="text-base lg:text-lg text-base-content font-bold bg-white threeLinePhrase"
+                dangerouslySetInnerHTML={{ __html: name ?? "" }}
+              />
+            )}
           </div>
         )}
         {l?.hide?.allPrices ? "" : (
