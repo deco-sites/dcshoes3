@@ -206,20 +206,20 @@ function ProductCard(
         <figcaption
           class={`
           absolute bottom-1 left-0 w-full flex flex-col gap-3 p-2 ${
-            l?.onMouseOver?.showSkuSelector || l?.onMouseOver?.showCta
-              ? "transition-opacity opacity-0 lg:group-hover:opacity-100"
+            l?.onMouseOver?.showSkuSelector || l?.onMouseOver?.showCta || l?.onMouseOver?.showQuickView
+              ? "transition-opacity opacity-0 lg:group-hover:opacity-100 items-center"
               : "lg:hidden"
           }`}
         >
+          {l?.onMouseOver?.showCta && cta}
+          {l?.onMouseOver?.showQuickView && (
+            <p class="text-[#000] hidden md:block w-full bg-[#D9D9D9E6] text-center py-2">QUICK VIEW</p>
+            )}
           {/* SKU Selector */}
           {l?.onMouseOver?.showSkuSelector && (
             <ul class="flex justify-center items-center gap-2 w-full">
               {skuSelector}
             </ul>
-          )}
-          {l?.onMouseOver?.showCta && cta}
-          {l?.onMouseOver?.showQuickView && (
-            <p class="text-[#777777] hidden md:block">QUICK VIEW</p>
           )}
         </figcaption>
       </figure>
