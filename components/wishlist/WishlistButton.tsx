@@ -26,9 +26,7 @@ function WishlistButton({
 
   return (
     <Button
-      class={variant === "icon"
-        ? "btn-circle btn-ghost gap-2"
-        : "btn-primary btn-outline gap-2"}
+      class="btn-primary gap-2 bg-white border-black hover:bg-black text-black hover:text-white"
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {
@@ -61,7 +59,7 @@ function WishlistButton({
         strokeWidth={2}
         fill={inWishlist ? "black" : "none"}
       />
-      {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"}
+      {variant === "icon" ? null : inWishlist ? "REMOVER DA LISTA DE DESEJOS" : "ADICIONAR Á LISTA DE DESEJOS"}
     </Button>
   );
 }
