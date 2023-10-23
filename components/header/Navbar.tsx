@@ -66,7 +66,6 @@ function Navbar({ items, searchbar, logo, hide }: {
         )}
 
         <div class="flex gap-1">
-          <SearchButton />
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
         </div>
