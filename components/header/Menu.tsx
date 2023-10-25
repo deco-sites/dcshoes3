@@ -18,11 +18,15 @@ function MenuItem({ item }: { item: INavItem }) {
   return (
     <div class="collapse collapse-plus">
       <input type="checkbox" />
-      <div class="collapse-title">{item.label}</div>
+      <div class="collapse-title text-lg">
+        <p class="text-base">
+        {item?.label}
+        </p>
+      </div>
       <div class="collapse-content">
         <ul>
           <li>
-            <a class="underline text-sm" href={item.href}>Ver todos</a>
+            <a class="underline text-sm" href={item?.href}>Ver todos</a>
           </li>
           {item.children?.map((node) => (
             <li>

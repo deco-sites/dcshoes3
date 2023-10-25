@@ -24,14 +24,14 @@ export interface Props {
 }
 
 const Aside = (
-  { title, onClose, children }: {
+  { title, onClose, children, logo }: {
     title: string;
     onClose?: () => void;
     children: ComponentChildren;
-    logo?: { src: LiveImage; alt: string };
+    logo?: { src: string; alt: string };
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[70%]">
+  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y w-full">
     <div class="flex justify-center items-center relative">
       {onClose && (
         <Button class="absolute left-2 top-2" onClick={onClose}>

@@ -77,7 +77,7 @@ const DEFAULT_VALUE = {
 function Header({
   alerts,
   searchbar,
-  navItems,
+  navItems = [],
   logo,
   menuTop = [],
   hide = DEFAULT_VALUE.hide,
