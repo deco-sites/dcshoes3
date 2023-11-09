@@ -113,8 +113,8 @@ export default function Banner({
               <Source
                 media="(min-width: 768px)"
                 src={srcDesktop ?? ""}
-                width={384}
-                height={168}
+                width={440}
+                height={181}
               />
               <img
                 class="w-full"
